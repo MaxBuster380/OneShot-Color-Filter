@@ -23,12 +23,8 @@ open class ThreeDVector {
         fun dotProduct(a : ThreeDVector, b : ThreeDVector):Int {
             //https://people.eecs.ku.edu/~jrmiller/Courses/VectorGeometry/VectorOperations.html
 
-            val aX = a.getComp(0)
-            val aY = a.getComp(1)
-            val aZ = a.getComp(2)
-            val bX = b.getComp(0)
-            val bY = b.getComp(1)
-            val bZ = b.getComp(2)
+            val aX = a.getComp(0); val aY = a.getComp(1); val aZ = a.getComp(2)
+            val bX = b.getComp(0); val bY = b.getComp(1); val bZ = b.getComp(2)
 
             return aX*bX + aY*bY + aZ*bZ
         }
@@ -106,9 +102,7 @@ open class ThreeDVector {
         //https://people.eecs.ku.edu/~jrmiller/Courses/VectorGeometry/VectorOperations.html
 
         val res = IntMatrix(3,3)
-        val x = comp[0]
-        val y = comp[1]
-        val z = comp[2]
+        val x = comp[0]; val y = comp[1]; val z = comp[2]
 
         res.setRow(0, mutableListOf( 0, -z,  y))
         res.setRow(1, mutableListOf( z,  0, -x))

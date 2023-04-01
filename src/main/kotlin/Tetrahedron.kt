@@ -24,10 +24,7 @@ class Tetrahedron {
     fun contains(target : ThreeDVector) : Boolean {
         //https://stackoverflow.com/questions/25179693/how-to-check-whether-the-point-is-in-the-tetrahedron-or-not
 
-        val v1 = vertices[0]
-        val v2 = vertices[1]
-        val v3 = vertices[2]
-        val v4 = vertices[3]
+        val v1 = vertices[0]; val v2 = vertices[1]; val v3 = vertices[2]; val v4 = vertices[3]
 
         val test1 = sameSide(v1, v2, v3, v4, target)
         val test2 = sameSide(v2, v3, v4, v1, target)
