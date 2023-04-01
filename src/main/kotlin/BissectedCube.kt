@@ -28,8 +28,8 @@ class BissectedCube {
      * Cuts all sections that contain the given point
      */
     fun bissectOn(newPoint : ThreeDVector) {
-        val sectionsWithNewPoint = mutableListOf<Tetrahedron>()
 
+        val sectionsWithNewPoint = mutableListOf<Tetrahedron>()
         for(i in sections.indices) {
             if (sections[i].contains(newPoint)) {
                 sectionsWithNewPoint += sections[i]
