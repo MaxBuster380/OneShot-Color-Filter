@@ -1,4 +1,5 @@
 import kotlin.math.abs
+import kotlin.math.sign
 
 class Tetrahedron {
 
@@ -13,6 +14,23 @@ class Tetrahedron {
     }
 
     // INSTANCE METHODS
+
+    /**
+     * Checks if the given point is inside the tetrahedron
+     */
+    fun contains(target : ThreeDVector) : Boolean {
+        val v1 = vertices[0]
+        val v2 = vertices[1]
+        val v3 = vertices[2]
+        val v4 = vertices[3]
+
+        val test1 = sameSide(v1, v2, v3, v4, target)
+        val test2 = sameSide(v2, v3, v4, v1, target)
+        val test3 = sameSide(v3, v4, v1, v2, target)
+        val test4 = sameSide(v4, v1, v2, v3, target)
+
+        return test1 && test2 && test3 && test4
+    }
 
     /**
      * Creates 4 different tetrahedrons that all have the given point as a vertice, the other vertices are vertices of the called tetrahedron.
@@ -50,6 +68,16 @@ class Tetrahedron {
 
     fun getVolume():Double {
         return volume
+    }
+
+    // PRIVATE INSTANCE METHODS
+
+    private fun sameSide(v1:ThreeDVector,v2:ThreeDVector,v3:ThreeDVector,v4:ThreeDVector,p:ThreeDVector):Boolean {
+        //https://stackoverflow.com/questions/25179693/how-to-check-whether-the-point-is-in-the-tetrahedron-or-not
+        val normal = ThreeDVector.crossProduct(v2.substract(v1),v3.substract(v1))
+        val dotV4 = ThreeDVector.dotProduct(normal, v4.substract(v1))
+        val dotP  = ThreeDVector.dotProduct(normal, p.substract(v1))
+        return sign(dotV4.toDouble()) == sign(dotP.toDouble())
     }
 
     /**

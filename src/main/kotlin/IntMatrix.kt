@@ -37,6 +37,27 @@ class IntMatrix {
     // INSTANCE METHODS
 
     /**
+     * Calculates A*b, where A is the current matrix and b is a vector
+     */
+    fun product(b : List<Int>):List<Int> {
+        if (b.size != nbRows) {
+            throw Exception("(Matrix.product) b's size is ${b.size}, where $nbRows is expected")
+        }
+
+        val res : MutableList<Int> = mutableListOf()
+
+        for(row in 0 until nbRows) {
+            var sum = 0
+            for(column in 0 until nbRows) {
+                sum += values[row][column] * b[column]
+            }
+            res += sum
+        }
+
+        return res
+    }
+
+    /**
      * Redefines a value on the matrix
      * @param rowIndex Row identifier
      * @param columnIndex Column identifier
