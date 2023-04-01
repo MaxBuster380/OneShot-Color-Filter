@@ -1,4 +1,6 @@
+import java.lang.Exception
 import kotlin.math.abs
+import kotlin.math.round
 import kotlin.math.sign
 
 /**
@@ -17,6 +19,25 @@ class Tetrahedron {
     }
 
     // INSTANCE METHODS
+
+    /**
+     * Returns the point generated with the given barycentric coordinates
+     */
+    fun translate(barycentricCoordinates : List<Double>):ThreeDVector {
+        if (barycentricCoordinates.size != 4) {
+            throw Exception("(Tetrahedron.translate) barycentricCoordinates's size is ${barycentricCoordinates.size}, where 4 is expected")
+        }
+
+        var x = 0.0; var y = 0.0; var z = 0.0
+
+        for (i in vertices.indices) {
+            x += vertices[i].getComp(0) * barycentricCoordinates[i]
+            y += vertices[i].getComp(1) * barycentricCoordinates[i]
+            z += vertices[i].getComp(2) * barycentricCoordinates[i]
+        }
+
+        return ThreeDVector(round(x).toInt(), round(y).toInt(), round(z).toInt())
+    }
 
     /**
      * Checks if the given point is inside the tetrahedron
