@@ -103,14 +103,16 @@ open class ThreeDVector {
     }
 
     fun getCrossProductMatrix():IntMatrix {
-        val res = IntMatrix(3,3)
+        //https://people.eecs.ku.edu/~jrmiller/Courses/VectorGeometry/VectorOperations.html
 
-        res.set(0,1, -comp[2])
-        res.set(0,2, comp[1])
-        res.set(1,0, comp[2])
-        res.set(1,2, -comp[0])
-        res.set(2,0, -comp[1])
-        res.set(2,1, comp[0])
+        val res = IntMatrix(3,3)
+        val x = comp[0]
+        val y = comp[1]
+        val z = comp[2]
+
+        res.setRow(0, mutableListOf( 0, -z,  y))
+        res.setRow(1, mutableListOf( z,  0, -x))
+        res.setRow(2, mutableListOf(-y,  x,  0))
 
         return res
     }

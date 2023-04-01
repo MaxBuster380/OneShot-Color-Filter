@@ -80,8 +80,8 @@ class Tetrahedron {
     private fun sameSide(v1:ThreeDVector,v2:ThreeDVector,v3:ThreeDVector,v4:ThreeDVector,p:ThreeDVector):Boolean {
         //https://stackoverflow.com/questions/25179693/how-to-check-whether-the-point-is-in-the-tetrahedron-or-not
         val normal = ThreeDVector.crossProduct(v2.substract(v1),v3.substract(v1))
-        val dotV4 = ThreeDVector.dotProduct(normal, v4.substract(v1))
-        val dotP  = ThreeDVector.dotProduct(normal, p.substract(v1))
+        val dotV4  = ThreeDVector.dotProduct(normal, v4.substract(v1))
+        val dotP   = ThreeDVector.dotProduct(normal, p.substract(v1))
         return sign(dotV4.toDouble()) == sign(dotP.toDouble())
     }
 
