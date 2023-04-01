@@ -26,4 +26,7 @@ class RelatedVector : ThreeDVector{
         return outputVector
     }
 
+    override fun toString(): String {
+        return "{${super.toString()},${getOutputVector()}}"
+    }
 }

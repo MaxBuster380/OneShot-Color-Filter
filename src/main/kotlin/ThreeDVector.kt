@@ -110,4 +110,8 @@ open class ThreeDVector {
 
         return res
     }
+
+    override fun toString(): String {
+        return "(${comp[0]},${comp[1]},${comp[2]})"
+    }
 }
