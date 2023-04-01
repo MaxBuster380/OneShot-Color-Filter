@@ -1,4 +1,6 @@
-class ThreeDVector {
+import java.lang.IndexOutOfBoundsException
+
+open class ThreeDVector {
 
     // INSTANCE ATTRIBUTES
     private val comp : MutableList<Int>
@@ -26,5 +28,21 @@ class ThreeDVector {
         for(i in 0 until 3) {
             comp[i] -= other.comp[i]
         }
+    }
+
+    fun setComp(index : Int, value : Int) {
+        if (index < 0 || index >= 3) {
+            throw IndexOutOfBoundsException("(ThreeDVector.setComp) $index is an invalid index")
+        }
+
+        comp[index] = value
+    }
+
+    fun getComp(index : Int):Int {
+        if (index < 0 || index >= 3) {
+            throw IndexOutOfBoundsException("(ThreeDVector.getComp) $index is an invalid index")
+        }
+
+        return comp[index]
     }
 }
