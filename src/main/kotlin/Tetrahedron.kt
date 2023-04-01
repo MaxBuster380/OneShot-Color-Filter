@@ -79,6 +79,8 @@ class Tetrahedron {
         val normal = ThreeDVector.crossProduct(v2.substract(v1),v3.substract(v1))
         val dotV4  = ThreeDVector.dotProduct(normal, v4.substract(v1))
         val dotP   = ThreeDVector.dotProduct(normal, p.substract(v1))
+
+        // "|| dotP == 0" means that the boundary of the tetrahedron is counted as "on the same side"
         return sign(dotV4.toDouble()) == sign(dotP.toDouble()) || dotP == 0
     }
 
