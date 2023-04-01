@@ -7,7 +7,7 @@ import java.lang.IndexOutOfBoundsException
  */
 class IntMatrix {
 
-    // ATTRIBUTES
+    // INSTANCE ATTRIBUTES
     private val values : MutableList<MutableList<Int>>
     private val nbRows : Int
     private val nbColumns : Int
@@ -34,7 +34,7 @@ class IntMatrix {
         }
     }
 
-    //METHODS
+    // INSTANCE METHODS
 
     /**
      * Redefines a value on the matrix
