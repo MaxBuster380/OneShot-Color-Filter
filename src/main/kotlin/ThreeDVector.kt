@@ -1,6 +1,9 @@
 import java.lang.Exception
 import java.lang.IndexOutOfBoundsException
 
+/**
+ * @author MaxBuster
+ */
 open class ThreeDVector {
     companion object {
         // CLASS METHODS
