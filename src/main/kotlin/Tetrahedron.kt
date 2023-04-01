@@ -79,7 +79,7 @@ class Tetrahedron {
         val normal = ThreeDVector.crossProduct(v2.substract(v1),v3.substract(v1))
         val dotV4  = ThreeDVector.dotProduct(normal, v4.substract(v1))
         val dotP   = ThreeDVector.dotProduct(normal, p.substract(v1))
-        return sign(dotV4.toDouble()) == sign(dotP.toDouble())
+        return sign(dotV4.toDouble()) == sign(dotP.toDouble()) || dotP == 0
     }
 
     /**

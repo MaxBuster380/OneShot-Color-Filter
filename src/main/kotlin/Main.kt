@@ -1,7 +1,8 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
-
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+    val tetraTest = Tetrahedron(
+        ThreeDVector(0,  0,  0),
+        ThreeDVector(255,0,  0),
+        ThreeDVector(0,  255,0),
+        ThreeDVector(0,  0,  255)
+    )
 }
