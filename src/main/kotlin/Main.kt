@@ -1,12 +1,13 @@
-import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.BufferedReader
 import java.io.File
 import java.lang.Exception
+import java.time.LocalTime
 import javax.imageio.ImageIO
+import kotlin.math.round
 
 fun main(args: Array<String>) {
-    val pathIn = "./src/main/resources/images/niko.png"
+    val pathIn = "./src/main/resources/images/artwork.png"
     val pathOut = "./src/main/resources/output.png"
     val rGBCube = getRGBCube("./src/main/resources/dataColors.txt")
 
@@ -18,6 +19,11 @@ fun applyOnImage(pathIn : String, pathOut: String, rGBCube : BissectedCube) {
 
     val imageWidth = image.width
     val imageHeight = image.height
+
+    var nbPixelsTreated = 0
+    val nbPixels = imageWidth*imageHeight
+    val displayStep = nbPixels/100
+    var nextDisplay = 0
 
     val outputImage = BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB)
 
@@ -31,8 +37,12 @@ fun applyOnImage(pathIn : String, pathOut: String, rGBCube : BissectedCube) {
 
             outputImage.setRGB(x,y,outputColor)
 
-            //println("1. $outputColor")
-            //println("2. ${image.getRGB(x,y)}")
+            nbPixelsTreated += 1
+            if (nbPixelsTreated > nextDisplay) {
+                nextDisplay += displayStep
+                val progress = round(nbPixelsTreated.toDouble()*100.0/nbPixels.toDouble()).toInt()
+                println("${LocalTime.now()} : $progress/100")
+            }
         }
     }
 
@@ -56,7 +66,7 @@ fun intColorToVector(color : Int):ThreeDVector {
 }
 
 fun applyFilter(rGBCube : BissectedCube, target:ThreeDVector):ThreeDVector {
-    val tetra = rGBCube.getSectionOf(target) ?: throw Exception("(applyFilter) No section found")
+    val tetra = rGBCube.getSectionOf(target) ?: throw Exception("(applyFilter) No section found for $target")
 
     val barycentricCoords = tetra.getBarycentricCoordinates(target)
     val vertices = tetra.getVertices() as List<RelatedVector>
@@ -104,6 +114,8 @@ fun getRGBCube(path:String) : BissectedCube {
         rGBCube.bissectOn(color)
         //println("$color, ${rGBCube.getNbSections()}")
     }
+
+    rGBCube.sortSections()
 
     return rGBCube
 }

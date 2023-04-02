@@ -68,6 +68,22 @@ class BissectedCube {
     }
 
     // PRIVATE INSTANCE METHODS
+
+    fun sortSections() {
+        for(i in 1 until sections.size) {
+            if (sections[i-1].getVolume() < sections[i].getVolume()) {
+                val current = sections[i]
+                var j = i-1
+                while(j > 0 && sections[j].getVolume() < current.getVolume()) {
+                    sections[j+1] = sections[j]
+
+                    j -= 1
+                }
+                sections[j+1] = current
+            }
+        }
+    }
+
     private fun cutAndDelete(target : Tetrahedron, cutter : ThreeDVector) {
         val subSections = target.cut(cutter)
 
