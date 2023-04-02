@@ -50,8 +50,9 @@ fun treatCommand(command : MatchResult) {
 fun applyCommand(pathIn : String, pathOut: String) {
     try {
         applyOnImage(pathIn, pathOut, rGBCube)
+        println("Image successfully created")
     }catch (e:Exception) {
-        println("An error has occured : $e")
+        println("An error has occurred : $e")
     }
 }
 

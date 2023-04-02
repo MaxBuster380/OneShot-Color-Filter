@@ -23,5 +23,5 @@
 hs_err_pid*
 replay_pid*
 
-src/main/resources/
+src/main/resources/images/
 out/production/ColorFilter/
