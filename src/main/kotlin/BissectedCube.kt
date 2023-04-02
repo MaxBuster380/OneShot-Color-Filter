@@ -39,6 +39,8 @@ class BissectedCube {
         for(section in sectionsWithNewPoint) {
             cutAndDelete(section, newPoint)
         }
+
+        sortSections()
     }
 
     /**
@@ -69,7 +71,7 @@ class BissectedCube {
 
     // PRIVATE INSTANCE METHODS
 
-    fun sortSections() {
+    private fun sortSections() {
         for(i in 1 until sections.size) {
             if (sections[i-1].getVolume() < sections[i].getVolume()) {
                 val current = sections[i]
