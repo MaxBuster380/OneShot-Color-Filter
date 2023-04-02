@@ -35,13 +35,13 @@ fun main(args: Array<String>) {
 fun treatCommand(command : MatchResult) {
     when (command.groupValues[2]) {
         "help" -> helpCommand()
-        "description" -> println("TODO")
+        //"description" -> println("TODO")
         "apply" ->  {
                         val inputPath = command.groupValues[4]
                         val outputPath = command.groupValues[5]
                         applyCommand(inputPath, outputPath)
                     }
-        "credits" -> println("TODO")
+        //"credits" -> println("TODO")
         "quit" -> quitCommand()
         else -> println("Invalid command1")
     }
