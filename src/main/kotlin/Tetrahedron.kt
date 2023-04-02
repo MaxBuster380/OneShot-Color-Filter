@@ -1,7 +1,6 @@
 import java.lang.Exception
 import kotlin.math.abs
 import kotlin.math.round
-import kotlin.math.sign
 
 /**
  * @author MaxBuster
@@ -50,7 +49,7 @@ class Tetrahedron {
             volumeSum += coord
         }
 
-        return volume.toInt() == volumeSum
+        return volume == volumeSum
     }
 
     /**
@@ -101,7 +100,7 @@ class Tetrahedron {
 
         val coordinates : MutableList<Int> = mutableListOf()
         for(i in cutPieces.indices) {
-            coordinates += (cutPieces[i].volume.toInt())
+            coordinates += (cutPieces[i].volume)
         }
 
         return coordinates

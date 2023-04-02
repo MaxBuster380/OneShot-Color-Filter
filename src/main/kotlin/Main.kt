@@ -2,17 +2,30 @@ import java.io.BufferedReader
 import java.io.File
 import java.lang.Exception
 
-
-val resourcePath = "${System.getProperty("user.dir")}/src/main/resources"
 fun main(args: Array<String>) {
-    val rGBCube = getRGBCube()
-
-    val tetra = rGBCube.getSectionOf(ThreeDVector(1,4,27))
-    print(tetra)
+    val rGBCube = getRGBCube("./src/main/resources/dataColors.txt")
+    val target = ThreeDVector(56,	24,	25)
+    print(applyFilter(rGBCube, target))
 }
 
-fun getRGBCube() : BissectedCube {
-    val fileColors = loadDataColors()
+fun applyFilter(rGBCube : BissectedCube, target:ThreeDVector):ThreeDVector {
+    val tetra = rGBCube.getSectionOf(target) ?: throw Exception("() No section found")
+
+    val barycentricCoords = tetra.getBarycentricCoordinates(target)
+    val vertices = tetra.getVertices() as List<RelatedVector>
+
+    val outputTetra = Tetrahedron(
+        vertices[0].getOutputVector(),
+        vertices[1].getOutputVector(),
+        vertices[2].getOutputVector(),
+        vertices[3].getOutputVector()
+    )
+
+    return outputTetra.translate(barycentricCoords)
+}
+
+fun getRGBCube(path:String) : BissectedCube {
+    val fileColors = loadDataColors(path)
     removeDuplicateColors(fileColors)
 
     val black = find(fileColors, 0, 0, 0)
@@ -65,10 +78,10 @@ fun removeDuplicateColors(list : MutableList<RelatedVector>) {
     }
 }
 
-fun loadDataColors(): MutableList<RelatedVector> {
+fun loadDataColors(path:String): MutableList<RelatedVector> {
     val resList = mutableListOf<RelatedVector>()
 
-    val bufferedReader: BufferedReader = File("$resourcePath/dataColors.txt").bufferedReader()
+    val bufferedReader: BufferedReader = File(path).bufferedReader()
 
     for (line in bufferedReader.lines()) {
         resList += createDataColor(line)
@@ -96,10 +109,9 @@ fun find(source: List<ThreeDVector>, x: Int, y: Int, z: Int): ThreeDVector? {
 }
 
 fun createDataColor(text: String): RelatedVector {
-    val matchTest = Regex("^(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s*$").find(text)
+    val match = Regex("^(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s*$").find(text)
         ?: throw Exception("(createDataColor) text does not follow the valid format")
 
-    val match = matchTest!!
     val x1 = (match.groupValues[1]).toInt()
     val y1 = (match.groupValues[2]).toInt()
     val z1 = (match.groupValues[3]).toInt()
