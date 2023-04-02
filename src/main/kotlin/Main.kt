@@ -10,38 +10,41 @@ fun main(args: Array<String>) {
     val pathOut = "./src/main/resources/output.png"
     val rGBCube = getRGBCube("./src/main/resources/dataColors.txt")
 
-    val testedColor = ThreeDVector(255,255,51)
-
     applyOnImage(pathIn, pathOut, rGBCube)
 }
 
 fun applyOnImage(pathIn : String, pathOut: String, rGBCube : BissectedCube) {
-    val target = ThreeDVector(56,	24,	25)
-
     val image: BufferedImage = ImageIO.read(File(pathIn))
 
-    val imageWidth = image.width; val imageHeight = image.height
+    val imageWidth = image.width
+    val imageHeight = image.height
+
+    val outputImage = BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB)
+
     for(x in 0 until imageWidth) {
         for(y in 0 until imageHeight) {
             val inputColor = image.getRGB(x,y)
             val inputVector = intColorToVector(inputColor)
+
             val outputVector = applyFilter(rGBCube, inputVector)
-            //println("$inputVector : $outputVector")
             val outputColor = vectorToIntColor(outputVector)
 
-            image.setRGB(x,y,outputColor)
+            outputImage.setRGB(x,y,outputColor)
+
+            //println("1. $outputColor")
+            //println("2. ${image.getRGB(x,y)}")
         }
     }
 
-    val outputFile = File(pathOut);
-    ImageIO.write(image, "png", outputFile)
+    val outputFile = File(pathOut)
+    ImageIO.write(outputImage, "png", outputFile)
 }
 
 fun vectorToIntColor(vector : ThreeDVector):Int {
     val comps = vector.getAllComp()
     var res = 255
     for(comp in comps) {
-        res = res * 256 + (comp and 255).toByte()
+        res = (res shl 8) or (comp and 255)
     }
     return res
 }
