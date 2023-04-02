@@ -10,7 +10,7 @@ class Tetrahedron {
 
     // INSTANCE ATTRIBUTES
     private val vertices : MutableList<ThreeDVector>
-    private val volume : Double
+    private val volume : Int
 
     // CONSTRUCTORS
     constructor(v0 : ThreeDVector, v1 : ThreeDVector, v2 : ThreeDVector, v3 : ThreeDVector) {
@@ -43,16 +43,14 @@ class Tetrahedron {
      * Checks if the given point is inside the tetrahedron
      */
     fun contains(target : ThreeDVector) : Boolean {
-        //https://stackoverflow.com/questions/25179693/how-to-check-whether-the-point-is-in-the-tetrahedron-or-not
+        val rawBaryCoords = getRawBarycentricCoordinates(target)
 
-        val v1 = vertices[0]; val v2 = vertices[1]; val v3 = vertices[2]; val v4 = vertices[3]
+        var volumeSum = 0
+        for(coord in rawBaryCoords) {
+            volumeSum += coord
+        }
 
-        val test1 = sameSide(v1, v2, v3, v4, target)
-        val test2 = sameSide(v2, v3, v4, v1, target)
-        val test3 = sameSide(v3, v4, v1, v2, target)
-        val test4 = sameSide(v4, v1, v2, v3, target)
-
-        return test1 && test2 && test3 && test4
+        return volume.toInt() == volumeSum
     }
 
     /**
@@ -79,7 +77,7 @@ class Tetrahedron {
 
         val coordinates : MutableList<Double> = mutableListOf()
         for(i in cutPieces.indices) {
-            coordinates += (cutPieces[i].volume / this.volume)
+            coordinates += (cutPieces[i].volume.toDouble() / this.volume.toDouble())
         }
 
         return coordinates
@@ -89,26 +87,30 @@ class Tetrahedron {
         return vertices
     }
 
-    fun getVolume():Double {
+    fun getVolume():Int {
         return volume
     }
 
     // PRIVATE INSTANCE METHODS
 
-    private fun sameSide(v1:ThreeDVector,v2:ThreeDVector,v3:ThreeDVector,v4:ThreeDVector,p:ThreeDVector):Boolean {
-        //https://stackoverflow.com/questions/25179693/how-to-check-whether-the-point-is-in-the-tetrahedron-or-not
-        val normal = ThreeDVector.crossProduct(v2.substract(v1),v3.substract(v1))
-        val dotV4  = ThreeDVector.dotProduct(normal, v4.substract(v1))
-        val dotP   = ThreeDVector.dotProduct(normal, p.substract(v1))
+    /**
+     * Returns the barycentric coordinates of a given point based on the tetrahedron
+     */
+    private fun getRawBarycentricCoordinates(clientVector : ThreeDVector):List<Int> {
+        val cutPieces = cut(clientVector)
 
-        // "|| dotP == 0" means that the boundary of the tetrahedron is counted as "on the same side"
-        return sign(dotV4.toDouble()) == sign(dotP.toDouble()) || dotP == 0
+        val coordinates : MutableList<Int> = mutableListOf()
+        for(i in cutPieces.indices) {
+            coordinates += (cutPieces[i].volume.toInt())
+        }
+
+        return coordinates
     }
 
     /**
      * Calculates the volume of the tetrahedron
      */
-    private fun calculateVolume() : Double {
+    private fun calculateVolume() : Int {
         //https://www.had2know.org/academics/tetrahedron-volume-4-vertices.html
 
         val vectorMatrix = IntMatrix(4,4)
@@ -121,6 +123,8 @@ class Tetrahedron {
             vectorMatrix.set(3,i,1)
         }
 
-        return abs(vectorMatrix.det()) / 6.0
+        // The correct volume formula would be "abs(vectorMatrix.det()) / 6.0"
+        // However, a constant 1/6 factor adds inprecision, and removing it just means assuming every tetrahedron is 6x bigger, which in most cases isn't a problem
+        return abs(vectorMatrix.det())// / 6.0
     }
 }

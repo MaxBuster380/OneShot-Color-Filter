@@ -10,8 +10,8 @@ class BissectedCube {
         y  :   ThreeDVector,
         z  :   ThreeDVector,
         xy :   ThreeDVector,
-        yz :   ThreeDVector,
         xz :   ThreeDVector,
+        yz :   ThreeDVector,
         xyz:   ThreeDVector
     ){
         sections += Tetrahedron(zero, xyz, xy, x)
@@ -73,6 +73,7 @@ class BissectedCube {
 
         sections.remove(target)
         for(subSection in subSections) {
+            if (subSection.getVolume() != 0)
             sections += subSection
         }
     }

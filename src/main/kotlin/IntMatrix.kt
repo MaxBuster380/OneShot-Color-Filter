@@ -48,7 +48,7 @@ class IntMatrix {
 
         for(row in 0 until nbRows) {
             var sum = 0
-            for(column in 0 until nbRows) {
+            for(column in 0 until nbColumns) {
                 sum += values[row][column] * b[column]
             }
             res += sum
@@ -153,13 +153,13 @@ class IntMatrix {
     /**
      * Returns the matrix's determinant
      */
-    fun det() : Double {
+    fun det() : Int {
         if (nbRows != nbColumns) {
             throw Exception("(Matrix.det) Can't get determinant of a non-square matrix")
         }
 
         if (nbRows == 1) {
-            return (values[0][0]).toDouble()
+            return (values[0][0])
         }
 
         if (nbRows == 2) {
@@ -168,11 +168,11 @@ class IntMatrix {
             val c = values[1][0]
             val d = values[1][1]
 
-            return (a*d - b*c).toDouble()
+            return (a*d - b*c)
         }
 
         // if nbRows > 2
-        var res = 0.0
+        var res = 0
         var sign = 1
         for(row in 0 until nbRows) {
             val factor = values[row][0]

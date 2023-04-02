@@ -50,6 +50,13 @@ open class ThreeDVector {
     // INSTANCE METHODS
 
     /**
+     * Checks if a given vector has the same values as the current one.
+     */
+    fun equals(other:ThreeDVector) : Boolean {
+        return (this.comp[0] == other.comp[0]) && (this.comp[1] == other.comp[1]) && (this.comp[2] == other.comp[2])
+    }
+
+    /**
      * Creates an instance of ThreeDVector with the same values as the called instance.
      */
     fun copy() : ThreeDVector {
