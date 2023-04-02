@@ -15,39 +15,74 @@ fun main(args: Array<String>) {
 }
 
 fun applyOnImage(pathIn : String, pathOut: String, rGBCube : BissectedCube) {
-    val image: BufferedImage = ImageIO.read(File(pathIn))
+    val inputImage: BufferedImage = ImageIO.read(File(pathIn))
 
-    val imageWidth = image.width
-    val imageHeight = image.height
-
-    var nbPixelsTreated = 0
-    val nbPixels = imageWidth*imageHeight
-    val displayStep = nbPixels/100
-    var nextDisplay = 0
+    val imageWidth = inputImage.width
+    val imageHeight = inputImage.height
 
     val outputImage = BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB)
 
+    // Set up UnionFind field
+    val unionFindForrest : MutableList<UnionFind<TwoDVector>> = mutableListOf()
     for(x in 0 until imageWidth) {
         for(y in 0 until imageHeight) {
-            val inputColor = image.getRGB(x,y)
+            unionFindForrest += UnionFind(TwoDVector(x,y))
+        }
+    }
+
+    // Form zones
+    for(i in unionFindForrest.indices) {
+        val elt1 = unionFindForrest[i]
+
+        if (i+1 < unionFindForrest.size) {
+            val elt2 = unionFindForrest[i+1]
+            if (colorOf(inputImage, elt1) == colorOf(inputImage, elt2)) {
+                elt1.union(elt2)
+            }
+        }
+
+        if (i+imageWidth < unionFindForrest.size) {
+            val elt2 = unionFindForrest[i+imageWidth]
+            if (colorOf(inputImage, elt1) == colorOf(inputImage, elt2)) {
+                elt1.union(elt2)
+            }
+        }
+    }
+
+    // Calculate the color of the representatives
+    for(elt in unionFindForrest) {
+        if (elt.isRepresentative()) {
+            val inputColor = colorOf(inputImage,elt)
             val inputVector = intColorToVector(inputColor)
 
             val outputVector = applyFilter(rGBCube, inputVector)
             val outputColor = vectorToIntColor(outputVector)
 
-            outputImage.setRGB(x,y,outputColor)
-
-            nbPixelsTreated += 1
-            if (nbPixelsTreated > nextDisplay) {
-                nextDisplay += displayStep
-                val progress = round(nbPixelsTreated.toDouble()*100.0/nbPixels.toDouble()).toInt()
-                println("${LocalTime.now()} : $progress/100")
-            }
+            setColorOf(outputImage, elt, outputColor)
         }
+    }
+
+    // Assign the color of the representative
+    for(elt in unionFindForrest) {
+        setColorOf(outputImage, elt, colorOf(outputImage, elt.find()))
     }
 
     val outputFile = File(pathOut)
     ImageIO.write(outputImage, "png", outputFile)
+}
+
+fun colorOf(sourceImage : BufferedImage, element : UnionFind<TwoDVector>):Int {
+    val vector = element.getValue()
+    val x = vector.getComp(0)
+    val y = vector.getComp(1)
+    return sourceImage.getRGB(x,y)
+}
+
+fun setColorOf(destImage : BufferedImage, element : UnionFind<TwoDVector>, color : Int) {
+    val vector = element.getValue()
+    val x = vector.getComp(0)
+    val y = vector.getComp(1)
+    destImage.setRGB(x,y,color)
 }
 
 fun vectorToIntColor(vector : ThreeDVector):Int {

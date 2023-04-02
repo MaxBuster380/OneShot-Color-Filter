@@ -15,6 +15,8 @@ class UnionFind<T> {
     // INSTANCE METHODS
 
     fun union(other:UnionFind<T>) {
+
+
         val u = this.find()
         val v = other.find()
 
@@ -33,5 +35,13 @@ class UnionFind<T> {
             this.father = this.father.find()
         }
         return this.father
+    }
+
+    fun getValue():T {
+        return value
+    }
+
+    fun isRepresentative():Boolean {
+        return this == father
     }
 }
