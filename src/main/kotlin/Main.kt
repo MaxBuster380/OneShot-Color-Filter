@@ -1,15 +1,59 @@
+import java.awt.Color
+import java.awt.image.BufferedImage
 import java.io.BufferedReader
 import java.io.File
 import java.lang.Exception
+import javax.imageio.ImageIO
 
 fun main(args: Array<String>) {
+    val pathIn = "./src/main/resources/images/niko.png"
+    val pathOut = "./src/main/resources/output.png"
     val rGBCube = getRGBCube("./src/main/resources/dataColors.txt")
+
+    val testedColor = ThreeDVector(255,255,51)
+
+    applyOnImage(pathIn, pathOut, rGBCube)
+}
+
+fun applyOnImage(pathIn : String, pathOut: String, rGBCube : BissectedCube) {
     val target = ThreeDVector(56,	24,	25)
-    print(applyFilter(rGBCube, target))
+
+    val image: BufferedImage = ImageIO.read(File(pathIn))
+
+    val imageWidth = image.width; val imageHeight = image.height
+    for(x in 0 until imageWidth) {
+        for(y in 0 until imageHeight) {
+            val inputColor = image.getRGB(x,y)
+            val inputVector = intColorToVector(inputColor)
+            val outputVector = applyFilter(rGBCube, inputVector)
+            //println("$inputVector : $outputVector")
+            val outputColor = vectorToIntColor(outputVector)
+
+            image.setRGB(x,y,outputColor)
+        }
+    }
+
+    val outputFile = File(pathOut);
+    ImageIO.write(image, "png", outputFile)
+}
+
+fun vectorToIntColor(vector : ThreeDVector):Int {
+    val comps = vector.getAllComp()
+    var res = 255
+    for(comp in comps) {
+        res = res * 256 + (comp and 255).toByte()
+    }
+    return res
+}
+fun intColorToVector(color : Int):ThreeDVector {
+    val red = (color and (255 shl 16)) shr 16
+    val green = (color and (255 shl 8)) shr 8
+    val blue = (color and 255)
+    return ThreeDVector(red, green, blue)
 }
 
 fun applyFilter(rGBCube : BissectedCube, target:ThreeDVector):ThreeDVector {
-    val tetra = rGBCube.getSectionOf(target) ?: throw Exception("() No section found")
+    val tetra = rGBCube.getSectionOf(target) ?: throw Exception("(applyFilter) No section found")
 
     val barycentricCoords = tetra.getBarycentricCoordinates(target)
     val vertices = tetra.getVertices() as List<RelatedVector>
