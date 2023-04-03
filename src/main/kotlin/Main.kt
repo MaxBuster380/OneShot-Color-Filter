@@ -63,7 +63,7 @@ fun treatCommand(args : Array<String>) {
         }
         "credits" -> creditsCommand()
         "quit" -> quitCommand()
-        else -> println("Invalid command1")
+        else -> println("Invalid command")
     }
 }
 
