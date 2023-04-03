@@ -123,7 +123,7 @@ class Tetrahedron {
         }
 
         // The correct volume formula would be "abs(vectorMatrix.det()) / 6.0"
-        // However, a constant 1/6 factor adds inprecision, and removing it just means assuming every tetrahedron is 6x bigger, which in most cases isn't a problem
+        // However, a constant 1/6 factor adds imprecision, and removing it just means assuming every tetrahedron is 6x bigger, which in most cases isn't a problem
         return abs(vectorMatrix.det())// / 6.0
     }
 }
