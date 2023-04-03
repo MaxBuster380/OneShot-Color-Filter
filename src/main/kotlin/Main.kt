@@ -1,20 +1,24 @@
+import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.BufferedReader
 import java.io.File
 import java.lang.Exception
+import java.util.Collections.max
+import java.util.Collections.min
 import javax.imageio.ImageIO
 
 var rGBCube : BissectedCube = getRGBCube("./src/main/resources/dataColors.txt")
 
-val regexValidCommand = "^((help|description|credits|quit|apply)( ([^ ]*) ([^ ]*))?)$"
+val regexValidCommand = "^(help|description|credits|quit|apply|stt)$"
 
 var notDone = true
+
+var tvThickness = 2
 
 fun main(args: Array<String>) {
     println("\tWORLD MACHINE COLOR FILTER")
 
-    val pathIn = "./src/main/resources/images/artwork.png"
-    val pathOut = "./src/main/resources/output.png"
+    // apply ./src/main/resources/images/niko.png ./src/main/resources/output.png
 
     var command : String? = null
 
@@ -22,9 +26,10 @@ fun main(args: Array<String>) {
         print("> ")
         command = readLine()
         if (command != null) {
-            val match = Regex(regexValidCommand).find(command)
-            if (match != null) {
-                treatCommand(match)
+            val arguments = command.split(" ".toRegex()).toTypedArray()
+
+            if (arguments.size != 0) {
+                treatCommand(arguments)
             }else{
                 println("Invalid command")
             }
@@ -32,16 +37,31 @@ fun main(args: Array<String>) {
     }
 }
 
-fun treatCommand(command : MatchResult) {
-    when (command.groupValues[2]) {
+fun treatCommand(args : Array<String>) {
+    val commandHead = args[0]
+
+    when (commandHead) {
         "help" -> helpCommand()
         "description" -> println("TODO")
         "apply" ->  {
-                        val inputPath = command.groupValues[4]
-                        val outputPath = command.groupValues[5]
+                        val inputPath = args[1]
+                        val outputPath = args[2]
                         applyCommand(inputPath, outputPath)
                     }
-        "credits" -> println("TODO")
+        "stt" -> {
+            try {
+                val newThickness = (args[1]).toInt()
+                if (newThickness >= 0) {
+                    tvThickness = newThickness
+                    println("TV thickness updated to $tvThickness")
+                }else{
+                    println("TV thickness must be positive.")
+                }
+            }catch(e:Exception) {
+                println("An error has occurred : $e")
+            }
+        }
+        "credits" -> creditsCommand()
         "quit" -> quitCommand()
         else -> println("Invalid command1")
     }
@@ -58,14 +78,56 @@ fun applyCommand(pathIn : String, pathOut: String) {
 
 fun helpCommand() {
     println("help\n\tShows this list\n")
-    println("description\n\tShows a description of the application\n")
+    //println("description\n\tShows a description of the application\n")
     println("apply [input image path] [output image path]\n\tShows a descirption of the application\n")
+    println("stt [integer] \n\tSets the thickness of the TV effect, in number of pixels\n")
     println("credits\n\tShows the app's credits\n")
     println("quit\n\tQuit")
 }
 
+fun creditsCommand() {
+    println("\tWORLD MACHINE COLOR FILTER")
+    println("Creator\t\t\tMaxBuster")
+    println("Designer\t\tMaxBuster")
+    println("Developer\t\tMaxBuster")
+    println("OneShot\t\t\tFutureCat")
+    println("Source images\tFutureCat")
+    println("\nProject repository : https://github.com/MaxBuster380/WorldMachine-Color-Filter")
+}
+
 fun quitCommand() {
     notDone = false
+}
+
+// -----------------------------------   TV EFFECT  -----------------------------------
+
+fun getTVColor(inColor:Color):Int {
+    val red = inColor.red; val green = inColor.green; val blue = inColor.blue;
+
+    val darkeningFactor = (5f/255f)
+
+    val hsb = Color.RGBtoHSB(red,green,blue,null)
+    val h = hsb[0]; val s = hsb[1]; val b = max(listOf((hsb[2]-darkeningFactor),0f))
+
+    return Color.HSBtoRGB(h,s,b)
+}
+
+fun applyTVEffect(source:BufferedImage,thickness:Int) {
+    var y = 0
+    var targetY = thickness
+    while(y < source.height) {
+
+        for(x in 0 until source.width) {
+            val tvColorInt = getTVColor(Color(source.getRGB(x,y)))
+            source.setRGB(x,y,tvColorInt)
+        }
+
+        y += 1
+        if (y == targetY) {
+            y += thickness
+            targetY += thickness * 2
+        }
+    }
 }
 
 // ----------------------------------- APPLY FILTER -----------------------------------
@@ -121,6 +183,8 @@ fun applyOnImage(pathIn : String, pathOut: String, rGBCube : BissectedCube) {
     for(elt in unionFindForrest) {
         setColorOf(outputImage, elt, colorOf(outputImage, elt.find()))
     }
+
+    applyTVEffect(outputImage,tvThickness)
 
     val outputFile = File(pathOut)
     ImageIO.write(outputImage, "png", outputFile)
