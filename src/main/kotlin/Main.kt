@@ -4,12 +4,9 @@ import java.io.BufferedReader
 import java.io.File
 import java.lang.Exception
 import java.util.Collections.max
-import java.util.Collections.min
 import javax.imageio.ImageIO
 
 var rGBCube : BissectedCube = getRGBCube("./src/main/resources/dataColors.txt")
-
-val regexValidCommand = "^(help|description|credits|quit|apply|stt)$"
 
 var notDone = true
 
@@ -20,11 +17,11 @@ fun main(args: Array<String>) {
 
     // apply ./src/main/resources/images/niko.png ./src/main/resources/output.png
 
-    var command : String? = null
+    var command : String?
 
     while(notDone) {
         print("> ")
-        command = readLine()
+        command = readlnOrNull()
         if (command != null) {
             val arguments = command.split(" ".toRegex()).toTypedArray()
 
@@ -102,7 +99,7 @@ fun quitCommand() {
 // -----------------------------------   TV EFFECT  -----------------------------------
 
 fun getTVColor(inColor:Color):Int {
-    val red = inColor.red; val green = inColor.green; val blue = inColor.blue;
+    val red = inColor.red; val green = inColor.green; val blue = inColor.blue
 
     val darkeningFactor = (5f/255f)
 
