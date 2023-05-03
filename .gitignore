@@ -25,3 +25,4 @@ replay_pid*
 
 src/main/resources/images/
 out/production/ColorFilter/
+.idea/
