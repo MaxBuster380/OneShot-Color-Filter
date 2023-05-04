@@ -14,7 +14,7 @@ var notDone = true
 var tvThickness = 2
 
 fun main(args: Array<String>) {
-    println("\tWORLD MACHINE COLOR FILTER")
+    println("\tONESHOT COLOR FILTER")
 
     var command : String?
 
@@ -44,7 +44,7 @@ fun treatCommand(args : Array<String>) {
                         val outputPath =  if (args.size >= 3) {
                              args[2]
                         }else{
-                            inputPath.substring(0,inputPath.length-4) + "_WorldMachineColorFilter.png"
+                            inputPath.substring(0,inputPath.length-4) + "_OneShotColorFilter.png"
                         }
                         applyCommand(inputPath, outputPath)
                     }
@@ -86,7 +86,7 @@ fun helpCommand() {
 }
 
 fun creditsCommand() {
-    println("\tWORLD MACHINE COLOR FILTER")
+    println("\tONESHOT COLOR FILTER")
     println("Creator\t\t\tMaxBuster")
     println("Designer\t\tMaxBuster")
     println("Developer\t\tMaxBuster")
