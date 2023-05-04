@@ -10,7 +10,7 @@ While this project is under MIT license, credit given is appreciated.
 To use this project, you may use any IDE that can run Kotlin and can take keyboard inputs. IntelliJ IDEA Community Version works and is free (https://www.jetbrains.com/idea/).
 
 A command invite will show. You have these options :
-
+```
 help
 	- Shows this list.
 
@@ -27,11 +27,11 @@ credits
 
 quit
 	- Close the app.
-	
+```
 
 Example of use :
-
+```
 > stt 2
 
 > apply C:\Users\User\Pictures\Niko.png
-	
+```
