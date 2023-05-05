@@ -7,7 +7,7 @@ import java.time.LocalTime
 import java.util.Collections.max
 import javax.imageio.ImageIO
 
-var rGBCube : BissectedCube = getRGBCube("./src/main/resources/dataColors.txt")
+var rGBCube : BissectedCube = getRGBCube("./src/jvmMain/resources/dataColors.txt")
 
 var notDone = true
 
