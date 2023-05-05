@@ -3,6 +3,7 @@ import kotlin.math.abs
 import kotlin.math.round
 
 /**
+ * A tetrahedron using ThreeDVector
  * @author MaxBuster
  */
 class Tetrahedron {

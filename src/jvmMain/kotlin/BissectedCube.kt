@@ -1,3 +1,6 @@
+/**
+ * A cube sliced into tetrahedrons
+ */
 class BissectedCube {
 
     // INSTANCE ATTRIBUTES
@@ -65,6 +68,9 @@ class BissectedCube {
         return res
     }
 
+    /**
+     * Returns the number of tetrahedrons currently in the cube.
+     */
     fun getNbSections():Int {
         return sections.size
     }
