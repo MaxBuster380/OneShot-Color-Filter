@@ -1,3 +1,5 @@
+package model.classes
+
 class BissectedCube {
 
     // INSTANCE ATTRIBUTES
@@ -6,13 +8,13 @@ class BissectedCube {
     // CONSTRUCTORS
     constructor(
         zero : ThreeDVector,
-        x  :   ThreeDVector,
-        y  :   ThreeDVector,
-        z  :   ThreeDVector,
-        xy :   ThreeDVector,
-        xz :   ThreeDVector,
-        yz :   ThreeDVector,
-        xyz:   ThreeDVector
+        x  : ThreeDVector,
+        y  : ThreeDVector,
+        z  : ThreeDVector,
+        xy : ThreeDVector,
+        xz : ThreeDVector,
+        yz : ThreeDVector,
+        xyz: ThreeDVector
     ){
         sections += Tetrahedron(zero, xyz, xy, x)
         sections += Tetrahedron(zero, xyz, xy, y)
@@ -46,7 +48,7 @@ class BissectedCube {
     /**
      * Finds a tetrahedron in the cube in which lies the given point
      */
-    fun getSectionOf(target : ThreeDVector):Tetrahedron? {
+    fun getSectionOf(target : ThreeDVector): Tetrahedron? {
         var res : Tetrahedron? = null
 
         var i = 0

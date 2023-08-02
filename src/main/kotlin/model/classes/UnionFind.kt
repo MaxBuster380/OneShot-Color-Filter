@@ -1,3 +1,5 @@
+package model.classes
+
 class UnionFind<T> {
 
     // INSTANCE ATTRIBUTES
@@ -14,7 +16,7 @@ class UnionFind<T> {
 
     // INSTANCE METHODS
 
-    fun union(other:UnionFind<T>) {
+    fun union(other: UnionFind<T>) {
 
 
         val u = this.find()
@@ -30,7 +32,7 @@ class UnionFind<T> {
             v.rank += 1
         }
     }
-    fun find():UnionFind<T> {
+    fun find(): UnionFind<T> {
         if (this != this.father) {
             this.father = this.father.find()
         }

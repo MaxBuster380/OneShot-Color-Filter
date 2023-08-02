@@ -1,3 +1,5 @@
+package model.classes
+
 import java.lang.Exception
 import java.lang.IndexOutOfBoundsException
 

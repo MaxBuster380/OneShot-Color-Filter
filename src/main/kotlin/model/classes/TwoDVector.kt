@@ -1,3 +1,5 @@
+package model.classes
+
 import java.lang.IndexOutOfBoundsException
 
 class TwoDVector {
@@ -13,7 +15,7 @@ class TwoDVector {
     // INSTANCE METHODS
     fun getComp(index : Int):Int {
         if (index < 0 || index >= 2) {
-            throw IndexOutOfBoundsException("(TwoDVector.getComp) $index is an invalid index")
+            throw IndexOutOfBoundsException("(model.classes.TwoDVector.getComp) $index is an invalid index")
         }
 
         return comp[index]

@@ -1,3 +1,5 @@
+package model.classes
+
 import java.lang.Exception
 import kotlin.math.abs
 import kotlin.math.round
@@ -22,9 +24,9 @@ class Tetrahedron {
     /**
      * Returns the point generated with the given barycentric coordinates
      */
-    fun translate(barycentricCoordinates : List<Double>):ThreeDVector {
+    fun translate(barycentricCoordinates : List<Double>): ThreeDVector {
         if (barycentricCoordinates.size != 4) {
-            throw Exception("(Tetrahedron.translate) barycentricCoordinates's size is ${barycentricCoordinates.size}, where 4 is expected")
+            throw Exception("(model.classes.Tetrahedron.translate) barycentricCoordinates's size is ${barycentricCoordinates.size}, where 4 is expected")
         }
 
         var x = 0.0; var y = 0.0; var z = 0.0
@@ -59,7 +61,7 @@ class Tetrahedron {
      *  (clientVector, vertice0, vertice1, vertice3),
      *  (clientVector, vertice0, vertice1, vertice2)
      */
-    fun cut(clientVector:ThreeDVector):List<Tetrahedron> {
+    fun cut(clientVector: ThreeDVector):List<Tetrahedron> {
         val tV0 = Tetrahedron(clientVector, vertices[1], vertices[2], vertices[3])
         val tV1 = Tetrahedron(clientVector, vertices[0], vertices[2], vertices[3])
         val tV2 = Tetrahedron(clientVector, vertices[0], vertices[1], vertices[3])

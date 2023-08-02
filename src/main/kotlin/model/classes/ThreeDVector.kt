@@ -1,3 +1,5 @@
+package model.classes
+
 import java.lang.Exception
 import java.lang.IndexOutOfBoundsException
 
@@ -10,7 +12,7 @@ open class ThreeDVector {
         /**
          * Returns the cross product of the input vectors
          */
-        fun crossProduct(a : ThreeDVector, b : ThreeDVector):ThreeDVector {
+        fun crossProduct(a : ThreeDVector, b : ThreeDVector): ThreeDVector {
             //https://people.eecs.ku.edu/~jrmiller/Courses/VectorGeometry/VectorOperations.html
             val cA = a.getCrossProductMatrix()
             val listRes = cA.product(b.getAllComp())
@@ -41,7 +43,7 @@ open class ThreeDVector {
 
     constructor(source : List<Int>) {
         if (source.size != 3) {
-            throw Exception("(ThreeDVector constructor) source's size is ${source.size}, where 3 is expected")
+            throw Exception("(model.classes.ThreeDVector constructor) source's size is ${source.size}, where 3 is expected")
         }
 
         comp = mutableListOf(source[0],source[1],source[2])
@@ -52,12 +54,12 @@ open class ThreeDVector {
     /**
      * Checks if a given vector has the same values as the current one.
      */
-    fun equals(other:ThreeDVector) : Boolean {
+    fun equals(other: ThreeDVector) : Boolean {
         return (this.comp[0] == other.comp[0]) && (this.comp[1] == other.comp[1]) && (this.comp[2] == other.comp[2])
     }
 
     /**
-     * Creates an instance of ThreeDVector with the same values as the called instance.
+     * Creates an instance of model.classes.ThreeDVector with the same values as the called instance.
      */
     fun copy() : ThreeDVector {
         return ThreeDVector(comp[0],comp[1],comp[2])
@@ -66,7 +68,7 @@ open class ThreeDVector {
     /**
      * Adds the given vector to the current one, outputs a new instance
      */
-    fun sum(other : ThreeDVector):ThreeDVector {
+    fun sum(other : ThreeDVector): ThreeDVector {
         val values :MutableList<Int> = mutableListOf()
         for(i in 0 until 3) {
             values += comp[i] + other.comp[i]
@@ -77,7 +79,7 @@ open class ThreeDVector {
     /**
      * Substracts the given vector to the current one, outputs a new instance
      */
-    fun substract(other : ThreeDVector):ThreeDVector {
+    fun substract(other : ThreeDVector): ThreeDVector {
         val values :MutableList<Int> = mutableListOf()
         for(i in 0 until 3) {
             values += comp[i] - other.comp[i]
@@ -87,7 +89,7 @@ open class ThreeDVector {
 
     fun setComp(index : Int, value : Int) {
         if (index < 0 || index >= 3) {
-            throw IndexOutOfBoundsException("(ThreeDVector.setComp) $index is an invalid index")
+            throw IndexOutOfBoundsException("(model.classes.ThreeDVector.setComp) $index is an invalid index")
         }
 
         comp[index] = value
@@ -95,7 +97,7 @@ open class ThreeDVector {
 
     fun getComp(index : Int):Int {
         if (index < 0 || index >= 3) {
-            throw IndexOutOfBoundsException("(ThreeDVector.getComp) $index is an invalid index")
+            throw IndexOutOfBoundsException("(model.classes.ThreeDVector.getComp) $index is an invalid index")
         }
 
         return comp[index]
@@ -105,7 +107,7 @@ open class ThreeDVector {
         return comp
     }
 
-    fun getCrossProductMatrix():IntMatrix {
+    fun getCrossProductMatrix(): IntMatrix {
         //https://people.eecs.ku.edu/~jrmiller/Courses/VectorGeometry/VectorOperations.html
 
         val res = IntMatrix(3,3)
