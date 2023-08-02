@@ -25,13 +25,20 @@ class ExportImagePanel:JPanel() {
 		val res = JTextField(
 			StringsManager.get("no_output_path_selected")
 		)
-		res.isEnabled = true
+		res.isEnabled = false
+
 		return res
 	}
 
 	private fun createAutoGeneratePathButton():JCheckBox {
 		val res = JCheckBox()
 		res.isEnabled = true
+
+
+		res.addActionListener {
+			println("AutoGeneratePathButton checked.")
+		}
+
 		return res
 	}
 
@@ -40,6 +47,11 @@ class ExportImagePanel:JPanel() {
 			StringsManager.get("export_image")
 		)
 		res.isEnabled = true
+
+		res.addActionListener {
+			println("ExportButton pressed.")
+		}
+
 		return res
 	}
 

@@ -27,6 +27,11 @@ class HeaderPanel: JPanel() {
 			StringsManager.get("go_to_repository")
 		)
 		res.isEnabled = true
+
+		res.addActionListener {
+			println("RepositoryButton pressed.")
+		}
+
 		return res
 	}
 }

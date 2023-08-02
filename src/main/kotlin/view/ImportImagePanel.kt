@@ -26,6 +26,7 @@ class ImportImagePanel:JPanel() {
 			StringsManager.get("no_input_file_picked")
 		)
 		res.isEnabled = false
+
 		return res
 	}
 
@@ -33,6 +34,11 @@ class ImportImagePanel:JPanel() {
 		val res = JButton(
 			StringsManager.get("pick_input_file")
 		)
+
+		res.addActionListener {
+			println("PickNewFileButton pressed.")
+		}
+
 		res.isEnabled = true
 		return res
 	}
