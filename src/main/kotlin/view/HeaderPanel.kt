@@ -21,7 +21,7 @@ class HeaderPanel: JPanel() {
 	}
 
 	private fun createRepositoryButton(): JButton {
-		val res = JButton()
+		val res = JButton("PLACEHOLDER REPOSITORY BUTTON")
 		return res
 	}
 }
