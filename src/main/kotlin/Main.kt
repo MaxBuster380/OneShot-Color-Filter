@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage
 import java.io.BufferedReader
 import java.io.File
 import java.lang.Exception
-import java.time.LocalTime
+import java.sql.Timestamp
 import java.util.Collections.max
 import javax.imageio.ImageIO
 
@@ -185,7 +185,7 @@ fun applyOnImage(pathIn : String, pathOut: String, rGBCube : BissectedCube) {
         if (progressIterator >= progressUpdate) {
             progressIterator = 0
             println("Update \t " +
-                    "${LocalTime.now().toString().substring(0,10)} \t " +
+                    "${Timestamp(System.currentTimeMillis())} \t " +
                     "${(allProgress*100.0/unionFindForrest.size).toString().substring(0,5)}% done.")
         }
     }
@@ -297,8 +297,10 @@ fun loadDataColors(path:String): MutableList<RelatedVector> {
 
     val bufferedReader: BufferedReader = File(path).bufferedReader()
 
-    for (line in bufferedReader.lines()) {
+    var line = bufferedReader.readLine()
+    while(line != null) {
         resList += createDataColor(line)
+        line = bufferedReader.readLine()
     }
 
     bufferedReader.close()
