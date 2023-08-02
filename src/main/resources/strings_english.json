@@ -1,0 +1,11 @@
+{
+	"application_title":"OneShot Color Filter",
+    "go_to_repository":"Git Repository",
+    "no_input_file_picked":"No image picked.",
+    "pick_input_file":"Select input image",
+    "set_tv_effect_size":"TV Effect size (in pixels)",
+    "apply_color_effects":"Apply",
+    "no_output_path_selected":"No output path picked.",
+    "option_auto_generate_output_path":"Use input path by default",
+    "export_image":"Export"
+}
