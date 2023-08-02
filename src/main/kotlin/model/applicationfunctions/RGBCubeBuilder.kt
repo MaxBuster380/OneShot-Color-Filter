@@ -3,12 +3,13 @@ package model.applicationfunctions
 import model.classes.BissectedCube
 import model.classes.RelatedVector
 import model.classes.ThreeDVector
-import java.io.BufferedReader
-import java.io.File
 import java.lang.Exception
+import kotlin.text.Regex
 
 class RGBCubeBuilder {
 	companion object {
+		private val Companion: Unit = Unit
+
 		fun getRGBCube(path:String) : BissectedCube {
 			val fileColors = loadDataColors(path)
 			removeDuplicateColors(fileColors)
@@ -63,16 +64,15 @@ class RGBCubeBuilder {
 		}
 		fun loadDataColors(path:String): MutableList<RelatedVector> {
 			val resList = mutableListOf<RelatedVector>()
+			val lineRegex = Regex("([^\n]+)")
 
-			val bufferedReader: BufferedReader = File(path).bufferedReader()
+			val text = this.Companion::class.java.classLoader.getResource("strings_english.json")?.readText()!!
 
-			var line = bufferedReader.readLine()
-			while(line != null) {
-				resList += createDataColor(line)
-				line = bufferedReader.readLine()
+			var match = lineRegex.find(text, 0)
+			while(match != null) {
+				resList += createDataColor(match.groupValues[1])
+				match = lineRegex.find(text, match.range.last+1)
 			}
-
-			bufferedReader.close()
 
 			return resList
 		}

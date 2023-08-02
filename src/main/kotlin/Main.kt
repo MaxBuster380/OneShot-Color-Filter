@@ -1,4 +1,3 @@
-import model.applicationfunctions.TerminalMain
 import view.OSCFFrame
 import view.StringsManager
 

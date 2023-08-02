@@ -6,6 +6,8 @@ import com.google.gson.JsonParser
 class StringsManager {
 	companion object {
 
+		private val Companion: Unit = Unit
+
 		private var rawStrings : JsonObject? = null
 		fun load() {
 			val jsonString = getRawJson()
@@ -24,11 +26,10 @@ class StringsManager {
 		}
 
 		private fun getRawJson(): String {
-			val javaclass = {}.javaClass
-			println("javaclass=$javaclass")
-			val url = javaclass.getResource("strings_english.json")
-			println("url=$url")
-			return url?.readText()!!
+
+			val res = this.Companion::class.java.classLoader.getResource("strings_english.json")?.readText()
+
+			return res ?: throw NullPointerException("Couldn't find string file.")
 		}
 	}
 }
