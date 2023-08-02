@@ -12,6 +12,7 @@ class ControlPanel : JPanel() {
 		border = BorderFactory.createLineBorder(Color(128, 128, 128), 4)
 
 		add(ImportImagePanel())
+		add(ColorManipulationPanel())
 		add(ExportImagePanel())
 	}
 }
