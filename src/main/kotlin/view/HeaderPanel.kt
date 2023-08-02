@@ -16,12 +16,13 @@ class HeaderPanel: JPanel() {
 
 	private fun createTitleLabel():JLabel {
 		val res = JLabel("PLACEHOLDER TITLE")
-		res.isOpaque = true
+		res.isEnabled = true
 		return res
 	}
 
 	private fun createRepositoryButton(): JButton {
 		val res = JButton("PLACEHOLDER REPOSITORY BUTTON")
+		res.isEnabled = true
 		return res
 	}
 }

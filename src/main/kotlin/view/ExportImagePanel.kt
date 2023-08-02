@@ -23,17 +23,19 @@ class ExportImagePanel:JPanel() {
 
 	private fun createExportedFilePathTextField():JTextField {
 		val res = JTextField("PLACEHOLDER OUTPUT IMAGE PATH")
-		res.isEditable = false
+		res.isEnabled = true
 		return res
 	}
 
 	private fun createAutoGeneratePathButton():JCheckBox {
 		val res = JCheckBox()
+		res.isEnabled = true
 		return res
 	}
 
 	private fun createExportImageButton(): JButton {
 		val res = JButton("PLACEHOLDER EXPORT BUTTON")
+		res.isEnabled = true
 		return res
 	}
 

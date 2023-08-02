@@ -6,6 +6,9 @@ import java.awt.GridLayout
 import javax.swing.*
 
 class ColorManipulationPanel: JPanel() {
+	companion object {
+		const val DEFAULT_TV_EFFECT_SIZE = 2
+	}
 
 	private val tvEffectSizeTextField = createTvEffectSizeTextField()
 	private val applyButton = createApplyButton()
@@ -20,12 +23,14 @@ class ColorManipulationPanel: JPanel() {
 	}
 
 	private fun createTvEffectSizeTextField(): JTextField {
-		val res = JTextField("2")
+		val res = JTextField("$DEFAULT_TV_EFFECT_SIZE")
+		res.isEnabled = true
 		return res
 	}
 
 	private fun createApplyButton(): JButton {
 		val res = JButton("PLACEHOLDER APPLY BUTTON")
+		res.isEnabled = true
 		return res
 	}
 
