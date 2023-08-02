@@ -35,10 +35,12 @@ class WorkshopImage(
 	}
 
 	fun copy():WorkshopImage {
-		val cm: ColorModel = bufferedImage.getColorModel()
+		//https://stackoverflow.com/questions/3514158/how-do-you-clone-a-bufferedimage
+		val bi = bufferedImage
+		val cm: ColorModel = bi.getColorModel()
 		val isAlphaPremultiplied = cm.isAlphaPremultiplied
-		val raster: WritableRaster = bufferedImage.copyData(null)
-		val newImage =  BufferedImage(cm, raster, isAlphaPremultiplied, null)
+		val raster: WritableRaster = bi.copyData(null)
+		val newImage = BufferedImage(cm, raster, isAlphaPremultiplied, null).getSubimage(0, 0, bi.width, bi.height);
 		return WorkshopImage(newImage)
 	}
 }
