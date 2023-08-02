@@ -72,7 +72,8 @@ class TerminalMain {
         fun applyCommand(pathIn: String, pathOut: String) {
             try {
                 var rGBCube: BissectedCube = RGBCubeBuilder.getRGBCube("dataColors.txt")
-                val recoloredImage = ColorFilterApplier.applyOnImage(pathIn, pathOut, rGBCube)
+                val inputImage = ColorFilterApplier.loadImage(pathIn)
+                val recoloredImage = ColorFilterApplier.applyOnImage(inputImage, rGBCube)
                 TVEffectApplier.apply(recoloredImage, tvThickness)
                 recoloredImage.save(pathOut)
                 println("Image successfully created")

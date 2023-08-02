@@ -1,5 +1,6 @@
 package view
 
+import model.applicationfunctions.SwingModel
 import java.awt.Color
 import java.awt.GridLayout
 import java.awt.event.FocusEvent
@@ -8,24 +9,22 @@ import javax.swing.*
 
 
 class ColorManipulationPanel: JPanel() {
-	companion object {
-		const val DEFAULT_TV_EFFECT_SIZE = 2
-	}
 
 	private val tvEffectSizeTextField = createTvEffectSizeTextField()
 	private val applyButton = createApplyButton()
 
-	private var tvEffectSize = DEFAULT_TV_EFFECT_SIZE
+	private var tvEffectSize:Int
 
 	init {
 		layout = GridLayout(2,1)
 
+		tvEffectSize = SwingModel.DEFAULT_TV_EFFECT_SIZE
 		add(createTvEffectSizePanel())
 		add(applyButton)
 	}
 
 	private fun createTvEffectSizeTextField(): JTextField {
-		val res = JTextField("$DEFAULT_TV_EFFECT_SIZE")
+		val res = JTextField("$tvEffectSize")
 		res.isEnabled = true
 
 		res.addFocusListener(object : FocusListener {
@@ -35,6 +34,10 @@ class ColorManipulationPanel: JPanel() {
 				changeTvEffectSize(res.text)
 			}
 		})
+
+		res.addActionListener {
+			changeTvEffectSize(res.text)
+		}
 
 		return res
 	}
