@@ -17,8 +17,6 @@ class ImportImagePanel:JPanel() {
 
 		add(importedFilePathTextField)
 		add(pickNewFileButton)
-
-		border = BorderFactory.createLineBorder(Color(0, 0, 0), 4)
 	}
 
 	private fun createImportedFilePathTextField():JTextField {

@@ -4,11 +4,7 @@ import java.awt.Color
 import java.awt.GridLayout
 import java.awt.event.FocusEvent
 import java.awt.event.FocusListener
-import java.awt.event.KeyEvent
-import java.awt.event.KeyListener
 import javax.swing.*
-import javax.swing.event.DocumentEvent
-import javax.swing.event.DocumentListener
 
 
 class ColorManipulationPanel: JPanel() {
@@ -26,8 +22,6 @@ class ColorManipulationPanel: JPanel() {
 
 		add(createTvEffectSizePanel())
 		add(applyButton)
-
-		border = BorderFactory.createLineBorder(Color(0, 0, 0), 4)
 	}
 
 	private fun createTvEffectSizeTextField(): JTextField {

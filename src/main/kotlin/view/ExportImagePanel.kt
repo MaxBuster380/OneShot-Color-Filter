@@ -17,8 +17,6 @@ class ExportImagePanel:JPanel() {
 		add(exportedFilePathTextField)
 		add(createAutoPathPanel())
 		add(exportImageButton)
-
-		border = BorderFactory.createLineBorder(Color(0, 0, 0), 4)
 	}
 
 	private fun createExportedFilePathTextField():JTextField {
