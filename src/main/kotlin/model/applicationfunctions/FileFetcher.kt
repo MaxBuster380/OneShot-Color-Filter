@@ -16,7 +16,7 @@ class FileFetcher {
 			val rawImage: BufferedImage = ImageIO.read(File(pathIn))
 			return WorkshopImage(rawImage)
 		}
-		fun pickPngFile(): String {
+		fun pickPngFile(): String? {
 			val allowedExtensions = listOf(".png")
 
 			val dialog = FileDialog(null as Frame?, "", FileDialog.LOAD).apply {
@@ -32,9 +32,16 @@ class FileFetcher {
 
 				isVisible = true
 			}
-			val file: String = dialog.directory + dialog.file
+
+			val res = if (dialog.file != null){
+				dialog.directory + dialog.file
+			}else{
+				null
+			}
+
 			dialog.dispose()
-			return file
+
+			return res
 		}
 	}
 }
