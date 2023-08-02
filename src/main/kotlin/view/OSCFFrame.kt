@@ -17,6 +17,8 @@ class OSCFFrame: JFrame() {
 		add(HeaderPanel(), BorderLayout.NORTH)
 		add(WindowPanel(), BorderLayout.CENTER)
 
+		defaultCloseOperation = DISPOSE_ON_CLOSE
+
 		isVisible = true
 	}
 }
