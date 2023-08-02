@@ -1,12 +1,11 @@
 package view
 
-import java.awt.FlowLayout
 import java.awt.GridLayout
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
 
-class OSCFHeaderPanel: JPanel() {
+class HeaderPanel: JPanel() {
 	init {
 		layout = GridLayout(1,3)
 
