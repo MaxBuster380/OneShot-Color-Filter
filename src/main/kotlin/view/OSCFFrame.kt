@@ -1,5 +1,6 @@
 package view
 
+import model.applicationfunctions.SwingModel
 import java.awt.BorderLayout
 import javax.swing.JFrame
 
@@ -9,13 +10,15 @@ class OSCFFrame: JFrame() {
 		const val WIDTH = 809
 		const val HEIGHT = 500
 	}
+
+	private val model = SwingModel()
 	init {
 		title = StringsManager.get("application_title")
 		setSize(WIDTH, HEIGHT)
 		layout = BorderLayout()
 
 		add(HeaderPanel(), BorderLayout.NORTH)
-		add(WindowPanel(), BorderLayout.CENTER)
+		add(WindowPanel(model), BorderLayout.CENTER)
 
 		defaultCloseOperation = DISPOSE_ON_CLOSE
 

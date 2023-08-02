@@ -1,13 +1,14 @@
 package view
 
-import java.awt.Color
+import model.applicationfunctions.SwingModel
 import java.awt.GridLayout
-import javax.swing.BorderFactory
+import java.beans.PropertyChangeEvent
+import java.beans.PropertyChangeListener
 import javax.swing.JButton
 import javax.swing.JPanel
 import javax.swing.JTextField
 
-class ImportImagePanel:JPanel() {
+class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener {
 
 	private val importedFilePathTextField = createImportedFilePathTextField()
 	private val pickNewFileButton = createPickNewFileButton()
@@ -39,5 +40,14 @@ class ImportImagePanel:JPanel() {
 
 		res.isEnabled = true
 		return res
+	}
+
+	override fun propertyChange(evt: PropertyChangeEvent?) {
+		val newPath = model.getInputPath()
+		importedFilePathTextField.text  = if (newPath != "") {
+			newPath
+		}else{
+			StringsManager.get("no_input_file_picked")
+		}
 	}
 }

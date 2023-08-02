@@ -8,7 +8,7 @@ import java.awt.event.FocusListener
 import javax.swing.*
 
 
-class ColorManipulationPanel: JPanel() {
+class ColorManipulationPanel(private val model: SwingModel): JPanel() {
 
 	private val tvEffectSizeTextField = createTvEffectSizeTextField()
 	private val applyButton = createApplyButton()

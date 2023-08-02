@@ -1,11 +1,12 @@
 package view
 
+import model.applicationfunctions.SwingModel
 import java.awt.GridLayout
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
 
-class HeaderPanel: JPanel() {
+class HeaderPanel(): JPanel() {
 	init {
 		layout = GridLayout(1,3)
 

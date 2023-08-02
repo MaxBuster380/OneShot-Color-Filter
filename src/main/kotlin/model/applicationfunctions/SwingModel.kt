@@ -2,6 +2,7 @@ package model.applicationfunctions
 
 import model.classes.BissectedCube
 import java.awt.Color
+import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
 import java.io.File
 import java.lang.Exception
@@ -23,6 +24,10 @@ class SwingModel() {
 	private val rGBCube: BissectedCube = RGBCubeBuilder.getRGBCube("dataColors.txt")
 
 	private val propertyChange = PropertyChangeSupport(this)
+
+	fun addPropertyChangeListener(listener:PropertyChangeListener) {
+		propertyChange.addPropertyChangeListener(listener)
+	}
 
 	fun setInputPath(source:String) {
 		inputPath = source
@@ -69,5 +74,9 @@ class SwingModel() {
 		assert(filteredWithTvImage != null)
 
 		filteredWithTvImage!!.save(outputPath)
+	}
+
+	fun getInputPath():String {
+		return inputPath
 	}
 }
