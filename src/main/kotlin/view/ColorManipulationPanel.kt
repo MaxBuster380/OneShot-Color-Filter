@@ -29,7 +29,9 @@ class ColorManipulationPanel: JPanel() {
 	}
 
 	private fun createApplyButton(): JButton {
-		val res = JButton("PLACEHOLDER APPLY BUTTON")
+		val res = JButton(
+			StringsManager.get("apply_color_effects")
+		)
 		res.isEnabled = true
 		return res
 	}
@@ -38,7 +40,9 @@ class ColorManipulationPanel: JPanel() {
 		val res = JPanel()
 		res.layout = GridLayout(2,1)
 		res.add(
-			JLabel("PLACEHOLDER TV EFFECT SIZE")
+			JLabel(
+				StringsManager.get("set_tv_effect_size")
+			)
 		)
 		res.add(tvEffectSizeTextField)
 		return res

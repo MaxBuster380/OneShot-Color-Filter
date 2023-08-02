@@ -22,7 +22,9 @@ class ExportImagePanel:JPanel() {
 	}
 
 	private fun createExportedFilePathTextField():JTextField {
-		val res = JTextField("PLACEHOLDER OUTPUT IMAGE PATH")
+		val res = JTextField(
+			StringsManager.get("no_output_path_selected")
+		)
 		res.isEnabled = true
 		return res
 	}
@@ -34,7 +36,9 @@ class ExportImagePanel:JPanel() {
 	}
 
 	private fun createExportImageButton(): JButton {
-		val res = JButton("PLACEHOLDER EXPORT BUTTON")
+		val res = JButton(
+			StringsManager.get("export_image")
+		)
 		res.isEnabled = true
 		return res
 	}
@@ -44,7 +48,9 @@ class ExportImagePanel:JPanel() {
 		res.layout = FlowLayout()
 		res.add(autoGeneratePathButton)
 		res.add(
-			JLabel("PLACEHOLDER AUTO GENERATE PATH")
+			JLabel(
+				StringsManager.get("option_auto_generate_output_path")
+			)
 		)
 		return res
 	}

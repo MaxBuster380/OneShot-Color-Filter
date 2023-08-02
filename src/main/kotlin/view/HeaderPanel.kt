@@ -15,13 +15,17 @@ class HeaderPanel: JPanel() {
 	}
 
 	private fun createTitleLabel():JLabel {
-		val res = JLabel("PLACEHOLDER TITLE")
+		val res = JLabel(
+			StringsManager.get("application_title")
+		)
 		res.isEnabled = true
 		return res
 	}
 
 	private fun createRepositoryButton(): JButton {
-		val res = JButton("PLACEHOLDER REPOSITORY BUTTON")
+		val res = JButton(
+			StringsManager.get("go_to_repository")
+		)
 		res.isEnabled = true
 		return res
 	}

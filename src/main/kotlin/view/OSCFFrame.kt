@@ -10,7 +10,7 @@ class OSCFFrame: JFrame() {
 		const val HEIGHT = 500
 	}
 	init {
-		title = "PLACEHOLDER TITLE"
+		title = StringsManager.get("application_title")
 		setSize(WIDTH, HEIGHT)
 		layout = BorderLayout()
 

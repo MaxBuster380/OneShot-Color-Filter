@@ -22,13 +22,17 @@ class ImportImagePanel:JPanel() {
 	}
 
 	private fun createImportedFilePathTextField():JTextField {
-		val res = JTextField("PLACEHOLDER INPUT IMAGE PATH")
-		res.isEnabled = true
+		val res = JTextField(
+			StringsManager.get("no_input_file_picked")
+		)
+		res.isEnabled = false
 		return res
 	}
 
 	private fun createPickNewFileButton(): JButton {
-		val res = JButton("PLACEHOLDER IMPORT BUTTON")
+		val res = JButton(
+			StringsManager.get("pick_input_file")
+		)
 		res.isEnabled = true
 		return res
 	}
