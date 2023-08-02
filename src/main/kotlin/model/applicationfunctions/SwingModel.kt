@@ -3,6 +3,7 @@ package model.applicationfunctions
 import model.classes.BissectedCube
 import java.awt.Color
 import java.beans.PropertyChangeSupport
+import java.io.File
 import java.lang.Exception
 
 class SwingModel() {
@@ -39,7 +40,6 @@ class SwingModel() {
 
 	fun setAutoGenerateOutputPath(source:Boolean) {
 		autoGenerateOutputPath = source
-		
 	}
 
 	fun loadUnfilteredImage() {
@@ -52,6 +52,10 @@ class SwingModel() {
 		assert(unfilteredImage != null)
 
 		filteredNoTvImage = ColorFilterApplier.applyOnImage(unfilteredImage!!, rGBCube)
+	}
+
+	fun generateOutputPath() {
+		assert(inputPath != "")
 	}
 
 	fun generateFilteredWithTvImage() {
