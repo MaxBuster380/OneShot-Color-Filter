@@ -33,6 +33,7 @@ class SwingModel() {
 		val oldValue = inputPath
 		inputPath = newValue
 		propertyChange.firePropertyChange("inputPath", oldValue, newValue)
+		loadUnfilteredImage()
 	}
 
 	fun setOutputPath(source:String) {
@@ -53,6 +54,7 @@ class SwingModel() {
 		assert(inputPath != "")
 
 		unfilteredImage = FileFetcher.loadImage(inputPath)
+		propertyChange.firePropertyChange("unfilteredImage", null, null)
 	}
 
 	fun generateFilteredNoTvImage() {
@@ -80,5 +82,9 @@ class SwingModel() {
 
 	fun getInputPath():String {
 		return inputPath
+	}
+
+	fun getUnfilteredImage():WorkshopImage {
+		return unfilteredImage!!
 	}
 }

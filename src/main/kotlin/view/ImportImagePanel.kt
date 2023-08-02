@@ -48,12 +48,14 @@ class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 		return res
 	}
 
-	override fun propertyChange(evt: PropertyChangeEvent?) {
-		val newPath = model.getInputPath()
-		importedFilePathTextField.text  = if (newPath != "") {
-			newPath
-		}else{
-			"e"//StringsManager.get("no_input_file_picked")
+	override fun propertyChange(evt: PropertyChangeEvent) {
+		if (evt.propertyName != "inputPath") {
+			val newPath = model.getInputPath()
+			importedFilePathTextField.text  = if (newPath != "") {
+				newPath
+			}else{
+				StringsManager.get("no_input_file_picked")
+			}
 		}
 	}
 }

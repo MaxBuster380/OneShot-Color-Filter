@@ -15,8 +15,9 @@ class OSCFFrame: JFrame() {
 	init {
 		title = StringsManager.get("application_title")
 		setSize(WIDTH, HEIGHT)
-		layout = BorderLayout()
+		isResizable = false
 
+		layout = BorderLayout()
 		add(HeaderPanel(), BorderLayout.NORTH)
 		add(WindowPanel(model), BorderLayout.CENTER)
 
