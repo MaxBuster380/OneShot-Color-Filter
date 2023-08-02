@@ -8,11 +8,11 @@ import javax.swing.BorderFactory
 import javax.swing.JPanel
 
 
-class WindowPanel(private val model: SwingModel, frame: Frame): JPanel() {
+class WindowPanel(model: SwingModel): JPanel() {
 	init {
 		layout = BorderLayout()
 
 		add(ImagePanel(model), BorderLayout.CENTER)
-		add(ControlPanel(model, frame), BorderLayout.EAST)
+		add(ControlPanel(model), BorderLayout.EAST)
 	}
 }

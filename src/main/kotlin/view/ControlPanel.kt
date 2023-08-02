@@ -7,12 +7,12 @@ import java.awt.GridLayout
 import javax.swing.BorderFactory
 import javax.swing.JPanel
 
-class ControlPanel(private val model: SwingModel, frame: Frame) : JPanel() {
+class ControlPanel(model: SwingModel) : JPanel() {
 	init {
 		layout = GridLayout(3,1)
 
-		add(ImportImagePanel(model, frame))
+		add(ImportImagePanel(model))
 		add(ColorManipulationPanel(model))
-		add(ExportImagePanel(model, frame))
+		add(ExportImagePanel(model))
 	}
 }

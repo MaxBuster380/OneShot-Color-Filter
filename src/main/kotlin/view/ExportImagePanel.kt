@@ -7,10 +7,7 @@ import java.awt.Frame
 import java.awt.GridLayout
 import javax.swing.*
 
-class ExportImagePanel(
-	private val model: SwingModel,
-	private val frame: Frame
-):JPanel() {
+class ExportImagePanel(private val model: SwingModel):JPanel() {
 
 	private val exportedFilePathTextField = createExportedFilePathTextField()
 	private val autoGeneratePathButton = createAutoGeneratePathButton()

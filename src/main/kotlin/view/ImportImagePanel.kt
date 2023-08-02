@@ -10,10 +10,7 @@ import javax.swing.JButton
 import javax.swing.JPanel
 import javax.swing.JTextField
 
-class ImportImagePanel(
-	private val model: SwingModel,
-	private val frame:Frame
-):JPanel(),PropertyChangeListener {
+class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener {
 
 	private val importedFilePathTextField = createImportedFilePathTextField()
 	private val pickNewFileButton = createPickNewFileButton()
