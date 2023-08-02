@@ -41,8 +41,10 @@ class ImportImagePanel(
 		)
 
 		res.addActionListener {
-			val inputPath = FileFetcher.openFileDialog(frame)
-			model.setInputPath(inputPath)
+			val inputPath = FileFetcher.pickPngFile()
+			if (inputPath != null) {
+				model.setInputPath(inputPath)
+			}
 		}
 
 		res.isEnabled = true

@@ -3,9 +3,10 @@ package model.applicationfunctions
 import java.awt.FileDialog
 import java.awt.Frame
 import java.awt.image.BufferedImage
+import java.awt.image.ImageFilter
 import java.io.File
 import javax.imageio.ImageIO
-import javax.swing.JFrame
+import javax.swing.JFileChooser
 
 
 class FileFetcher {
@@ -15,10 +16,22 @@ class FileFetcher {
 			val rawImage: BufferedImage = ImageIO.read(File(pathIn))
 			return WorkshopImage(rawImage)
 		}
-		fun openFileDialog(window: Frame): String {
-			val dialog = FileDialog(null as Frame?, "Select File to Open")
-			dialog.mode = FileDialog.LOAD
-			dialog.isVisible = true
+		fun pickPngFile(): String {
+			val allowedExtensions = listOf(".png")
+
+			val dialog = FileDialog(null as Frame?, "", FileDialog.LOAD).apply {
+				// windows
+				file = allowedExtensions.joinToString(";") { "*$it" } // e.g. '*.jpg'
+
+				// linux
+				setFilenameFilter { _, name ->
+					allowedExtensions.any {
+						name.endsWith(it)
+					}
+				}
+
+				isVisible = true
+			}
 			val file: String = dialog.directory + dialog.file
 			dialog.dispose()
 			return file
