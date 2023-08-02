@@ -32,6 +32,11 @@ class ExportImagePanel:JPanel() {
 		return res
 	}
 
+	private fun createExportImageButton(): JButton {
+		val res = JButton("PLACEHOLDER EXPORT BUTTON")
+		return res
+	}
+
 	private fun createAutoPathPanel():JPanel {
 		val res = JPanel()
 		res.layout = FlowLayout()
@@ -39,11 +44,6 @@ class ExportImagePanel:JPanel() {
 		res.add(
 			JLabel("PLACEHOLDER AUTO GENERATE PATH")
 		)
-		return res
-	}
-
-	private fun createExportImageButton(): JButton {
-		val res = JButton("PLACEHOLDER EXPORT BUTTON")
 		return res
 	}
 }
