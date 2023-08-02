@@ -14,11 +14,6 @@ import javax.imageio.ImageIO
 
 class ColorFilterApplier() {
 	companion object {
-
-		fun loadImage(pathIn: String): WorkshopImage {
-			val rawImage: BufferedImage = ImageIO.read(File(pathIn))
-			return WorkshopImage(rawImage)
-		}
 		fun applyOnImage(inputImage: WorkshopImage, rGBCube: BissectedCube):WorkshopImage {
 
 			val imageWidth = inputImage.getImage().width

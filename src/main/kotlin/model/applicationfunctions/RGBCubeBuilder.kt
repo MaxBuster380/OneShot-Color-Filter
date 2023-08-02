@@ -66,7 +66,7 @@ class RGBCubeBuilder {
 			val resList = mutableListOf<RelatedVector>()
 			val lineRegex = Regex("([^\n]+)")
 
-			val text = this.Companion::class.java.classLoader.getResource("strings_english.json")?.readText()!!
+			val text = this.Companion::class.java.classLoader.getResource("dataColors.txt")?.readText()!!
 
 			var match = lineRegex.find(text, 0)
 			while(match != null) {

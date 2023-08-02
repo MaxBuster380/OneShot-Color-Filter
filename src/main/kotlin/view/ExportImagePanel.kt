@@ -3,10 +3,14 @@ package view
 import model.applicationfunctions.SwingModel
 import java.awt.Color
 import java.awt.FlowLayout
+import java.awt.Frame
 import java.awt.GridLayout
 import javax.swing.*
 
-class ExportImagePanel(private val model: SwingModel):JPanel() {
+class ExportImagePanel(
+	private val model: SwingModel,
+	private val frame: Frame
+):JPanel() {
 
 	private val exportedFilePathTextField = createExportedFilePathTextField()
 	private val autoGeneratePathButton = createAutoGeneratePathButton()

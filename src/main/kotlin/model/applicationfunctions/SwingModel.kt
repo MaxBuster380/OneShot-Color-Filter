@@ -29,8 +29,10 @@ class SwingModel() {
 		propertyChange.addPropertyChangeListener(listener)
 	}
 
-	fun setInputPath(source:String) {
-		inputPath = source
+	fun setInputPath(newValue:String) {
+		val oldValue = inputPath
+		inputPath = newValue
+		propertyChange.firePropertyChange("inputPath", oldValue, newValue)
 	}
 
 	fun setOutputPath(source:String) {
@@ -50,7 +52,7 @@ class SwingModel() {
 	fun loadUnfilteredImage() {
 		assert(inputPath != "")
 
-		unfilteredImage = ColorFilterApplier.loadImage(inputPath)
+		unfilteredImage = FileFetcher.loadImage(inputPath)
 	}
 
 	fun generateFilteredNoTvImage() {
