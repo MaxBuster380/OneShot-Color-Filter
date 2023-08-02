@@ -11,7 +11,7 @@ class WindowPanel: JPanel() {
 		layout = BorderLayout()
 		border = BorderFactory.createLineBorder(Color(187, 173, 160), 4)
 
-		add(JPanel(), BorderLayout.CENTER)
+		add(ImagePanel(), BorderLayout.CENTER)
 		add(ControlPanel(), BorderLayout.EAST)
 	}
 }
