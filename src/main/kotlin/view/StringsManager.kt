@@ -2,8 +2,6 @@ package view
 
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import java.io.BufferedReader
-import java.io.File
 
 class StringsManager {
 	companion object {
@@ -25,12 +23,12 @@ class StringsManager {
 			}
 		}
 
-		private fun getRawJson():String {
-			val file = File("./src/main/resources/strings_english.json")
-			val bufferedReader: BufferedReader = file.bufferedReader()
-			val jsonString = bufferedReader.readText()
-			bufferedReader.close()
-			return jsonString
+		private fun getRawJson(): String {
+			val javaclass = {}.javaClass
+			println("javaclass=$javaclass")
+			val url = javaclass.getResource("strings_english.json")
+			println("url=$url")
+			return url?.readText()!!
 		}
 	}
 }
