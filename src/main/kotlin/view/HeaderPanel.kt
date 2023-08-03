@@ -1,6 +1,5 @@
 package view
 
-import model.applicationfunctions.SwingModel
 import java.awt.GridLayout
 import javax.swing.JButton
 import javax.swing.JLabel
@@ -27,10 +26,15 @@ class HeaderPanel(): JPanel() {
 		val res = JButton(
 			StringsManager.get("go_to_repository")
 		)
+
+		val repositoryUrl = "https://github.com/MaxBuster380/OneShot-Color-Filter"
+
 		res.isEnabled = true
 
 		res.addActionListener {
-			println("RepositoryButton pressed.")
+			val rt = Runtime.getRuntime()
+			rt.exec("rundll32 url.dll,FileProtocolHandler $repositoryUrl")
+
 		}
 
 		return res
