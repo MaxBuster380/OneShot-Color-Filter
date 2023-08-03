@@ -56,7 +56,8 @@ class ExportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 
 	private fun createExportedFilePathTextField():JTextField {
 		val res = JTextField()
-		res.isEnabled = false
+		res.isEnabled = true
+		res.isEditable = false
 
 		return res
 	}
