@@ -49,13 +49,15 @@ class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 	}
 
 	override fun propertyChange(evt: PropertyChangeEvent) {
-		val propertiesToUpdateOn = listOf("inputPath")
+		val propertiesToUpdateOn = listOf("inputPath","working")
 		if (evt.propertyName in propertiesToUpdateOn) {
 			update()
 		}
 	}
 
 	override fun update() {
+		pickNewFileButton.isEnabled = !model.isWorking()
+
 		importedFilePathTextField.text = if (model.getInputPath() != "") {
 			model.getInputPath()
 		}else{

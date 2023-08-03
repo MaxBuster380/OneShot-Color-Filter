@@ -11,10 +11,12 @@ import java.io.File
 import java.lang.Exception
 import java.sql.Timestamp
 import javax.imageio.ImageIO
+import javax.swing.JProgressBar
+import kotlin.math.roundToInt
 
 class ColorFilterApplier() {
 	companion object {
-		fun applyOnImage(inputImage: WorkshopImage, rGBCube: BissectedCube):WorkshopImage {
+		fun applyOnImage(inputImage: WorkshopImage, rGBCube: BissectedCube, progressBar:JProgressBar?):WorkshopImage {
 
 			val imageWidth = inputImage.getImage().width
 			val imageHeight = inputImage.getImage().height
@@ -67,13 +69,10 @@ class ColorFilterApplier() {
 				allProgress += 1
 				if (progressIterator >= progressUpdate) {
 					progressIterator = 0
-					println(
-						"Update \t " +
-							"${Timestamp(System.currentTimeMillis())} \t " +
-							"${
-								(allProgress * 100.0 / unionFindForrest.size).toString().substring(0, 5)
-							}% done."
-					)
+					val progressPercent = (allProgress * 100.0 / unionFindForrest.size)
+					if (progressBar != null) {
+						progressBar.value = progressPercent.roundToInt()
+					}
 				}
 			}
 
@@ -81,6 +80,11 @@ class ColorFilterApplier() {
 			for (elt in unionFindForrest) {
 				outputImage.setColorOf(elt, outputImage.colorOf(elt.find()))
 			}
+
+			if (progressBar != null) {
+				progressBar.value = 100
+			}
+
 
 			//TVEffectApplier.apply(outputImage, tvThickness)
 			return outputImage

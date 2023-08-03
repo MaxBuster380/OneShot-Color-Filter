@@ -106,7 +106,7 @@ class ExportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 		return res
 	}
 	override fun propertyChange(evt: PropertyChangeEvent) {
-		val propertiesToUpdateOn = listOf("outputPath","filteredWithTvImage", "inputPath")
+		val propertiesToUpdateOn = listOf("outputPath","filteredWithTvImage", "inputPath","working")
 		if (evt.propertyName in propertiesToUpdateOn) {
 			update()
 		}
@@ -115,7 +115,7 @@ class ExportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 	override fun update() {
 		autoGeneratePathCheckBox.isSelected = checkedAutoGeneratePath
 		pickExportDirectoryButton.isEnabled = !checkedAutoGeneratePath
-		exportImageButton.isEnabled = model.getFilteredWithTvImage() != null
+		exportImageButton.isEnabled = model.getFilteredWithTvImage() != null && !model.isWorking()
 
 		exportedFilePathTextField.text = if (model.getOutputPath() != "") {
 			model.getOutputPath()

@@ -12,14 +12,16 @@ import javax.swing.*
 class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyChangeListener, UpdatableComponent {
 
 	private val tvEffectSizeTextField = createTvEffectSizeTextField()
+	private val progressBar = createProgressBar()
 	private val applyButton = createApplyButton()
 
 	init {
 		model.addPropertyChangeListener(this)
 
-		layout = GridLayout(2,1)
+		layout = GridLayout(3,1)
 
 		add(createTvEffectSizePanel())
+		add(progressBar)
 		add(applyButton)
 
 		update()
@@ -40,6 +42,12 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyC
 			model.setTvEffectSize(newValue)
 		}catch(_:Exception) {}
 		tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
+	}
+
+	private fun createProgressBar():JProgressBar {
+		val res = JProgressBar()
+		res.value = 0
+		return res
 	}
 
 	private fun createTvEffectSizeTextField(): JTextField {
@@ -66,10 +74,7 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyC
 		)
 
 		res.addActionListener {
-			if (model.getFilteredWithTvImage() == null) {
-				model.generateFilteredNoTvImage()
-			}
-			model.generateFilteredWithTvImage()
+			model.generateFilteredImage(progressBar)
 		}
 
 		return res
@@ -88,7 +93,7 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyC
 	}
 
 	override fun propertyChange(evt: PropertyChangeEvent?) {
-		val propertiesToUpdateOn = listOf("tvEffectSize", "unfilteredImage")
+		val propertiesToUpdateOn = listOf("tvEffectSize", "unfilteredImage","working")
 		if (evt!!.propertyName in propertiesToUpdateOn) {
 			update()
 		}
@@ -97,6 +102,6 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyC
 	override fun update() {
 		tvEffectSizeTextField.isEnabled = true
 		tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
-		applyButton.isEnabled = model.getUnfilteredImage() != null
+		applyButton.isEnabled = model.getUnfilteredImage() != null && !model.isWorking()
 	}
 }

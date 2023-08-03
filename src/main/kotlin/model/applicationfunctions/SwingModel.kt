@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
 import java.io.File
 import java.lang.Exception
+import javax.swing.JProgressBar
 
 class SwingModel {
 	companion object {
@@ -24,6 +25,8 @@ class SwingModel {
 	private val rGBCube: BissectedCube = RGBCubeBuilder.getRGBCube("dataColors.txt")
 
 	private val propertyChange = PropertyChangeSupport(this)
+
+	private var working = false
 
 	fun addPropertyChangeListener(listener:PropertyChangeListener) {
 		propertyChange.addPropertyChangeListener(listener)
@@ -52,10 +55,6 @@ class SwingModel {
 		propertyChange.firePropertyChange("tvEffectSize", oldValue, newValue)
 	}
 
-	fun setAutoGenerateOutputPath(source:Boolean) {
-		autoGenerateOutputPath = source
-	}
-
 	fun loadUnfilteredImage() {
 		assert(inputFile != null)
 
@@ -65,13 +64,23 @@ class SwingModel {
 		propertyChange.firePropertyChange("unfilteredImage", null, null)
 	}
 
-	fun generateFilteredNoTvImage() {
-		assert(unfilteredImage != null)
-
-		filteredNoTvImage = ColorFilterApplier.applyOnImage(unfilteredImage!!, rGBCube)
+	fun generateFilteredImage(progressBar: JProgressBar) {
+		Thread {
+			setWorking(true)
+			if (getFilteredWithTvImage() == null) {
+				generateFilteredNoTvImage(progressBar)
+			}
+			generateFilteredWithTvImage()
+			setWorking(false)
+		}.start()
 	}
 
-	fun generateFilteredWithTvImage() {
+	private fun generateFilteredNoTvImage(progressBar:JProgressBar) {
+		assert(unfilteredImage != null)
+		filteredNoTvImage = ColorFilterApplier.applyOnImage(unfilteredImage!!, rGBCube, progressBar)
+	}
+
+	private fun generateFilteredWithTvImage() {
 		assert(filteredNoTvImage != null)
 
 		filteredWithTvImage = filteredNoTvImage!!.copy()
@@ -115,5 +124,15 @@ class SwingModel {
 
 	fun getInputFile():File? {
 		return inputFile
+	}
+
+	fun isWorking():Boolean {
+		return working
+	}
+
+	private fun setWorking(newValue:Boolean) {
+		val oldValue = working
+		working = newValue
+		propertyChange.firePropertyChange("working",oldValue,newValue)
 	}
 }
