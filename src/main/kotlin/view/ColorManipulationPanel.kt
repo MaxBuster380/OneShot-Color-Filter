@@ -100,7 +100,7 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyC
 	}
 
 	override fun update() {
-		tvEffectSizeTextField.isEnabled = true
+		tvEffectSizeTextField.isEnabled = !model.isWorking()
 		tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
 		applyButton.isEnabled = model.getUnfilteredImage() != null && !model.isWorking()
 	}

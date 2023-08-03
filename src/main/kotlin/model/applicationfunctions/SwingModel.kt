@@ -16,7 +16,6 @@ class SwingModel {
 	private var inputFile:File? = null
 	private var outputFile:File? = null
 	private var tvEffectSize = DEFAULT_TV_EFFECT_SIZE
-	private var autoGenerateOutputPath = true
 
 	private var unfilteredImage : WorkshopImage? = null
 	private var filteredNoTvImage : WorkshopImage? = null
@@ -92,6 +91,7 @@ class SwingModel {
 		assert(filteredWithTvImage != null)
 
 		filteredWithTvImage!!.save(getOutputPath())
+		propertyChange.firePropertyChange("export", 0, 1)
 	}
 
 	fun getInputPath():String {

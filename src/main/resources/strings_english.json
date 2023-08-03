@@ -3,10 +3,17 @@
     "go_to_repository":"Git Repository",
     "no_input_file_picked":"No image picked.",
     "pick_input_file":"Select input image",
-    "set_tv_effect_size":"TV Effect size (in pixels)",
+    "set_tv_effect_size":"TV effect size (in pixels)",
     "apply_color_effects":"Apply",
     "pick_output_directory": "Select output directory",
     "no_output_path_picked":"No output path picked.",
     "option_auto_generate_output_path":"Use input path by default",
-    "export_image":"Export"
+    "export_image":"Export",
+
+    "message_app_started": "Application successfully launched.",
+    "message_image_inputted": "New image selected.",
+    "message_changed_tf_effect_size": "New TV effect size selected.",
+    "message_working": "Currently working, please wait...",
+    "message_done_applying": "Finished applying the filter.",
+    "message_exported": "Image successfully exported."
 }

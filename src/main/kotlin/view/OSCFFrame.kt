@@ -18,7 +18,7 @@ class OSCFFrame: JFrame() {
 		isResizable = false
 
 		layout = BorderLayout()
-		add(HeaderPanel(), BorderLayout.NORTH)
+		add(HeaderPanel(model), BorderLayout.NORTH)
 		add(WindowPanel(model), BorderLayout.CENTER)
 
 		defaultCloseOperation = DISPOSE_ON_CLOSE
