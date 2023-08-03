@@ -47,7 +47,10 @@ class ImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener 
 
 	override fun propertyChange(evt: PropertyChangeEvent) {
 		if (evt.propertyName == "unfilteredImage") {
-			displayImage(model.getUnfilteredImage())
+			displayImage(model.getUnfilteredImage()!!)
+		}
+		if (evt.propertyName == "filteredWithTvImage") {
+			displayImage(model.getFilteredWithTvImage()!!)
 		}
 	}
 }

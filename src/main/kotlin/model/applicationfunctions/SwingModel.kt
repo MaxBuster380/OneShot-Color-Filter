@@ -54,6 +54,8 @@ class SwingModel() {
 		assert(inputPath != "")
 
 		unfilteredImage = FileFetcher.loadImage(inputPath)
+		filteredNoTvImage = null
+		filteredWithTvImage = null
 		propertyChange.firePropertyChange("unfilteredImage", null, null)
 	}
 
@@ -72,6 +74,7 @@ class SwingModel() {
 
 		filteredWithTvImage = filteredNoTvImage!!.copy()
 		TVEffectApplier.apply(filteredWithTvImage!!, tvEffectSize)
+		propertyChange.firePropertyChange("filteredWithTvImage", null, null)
 	}
 
 	fun saveFilteredWithTvImage() {
@@ -84,7 +87,15 @@ class SwingModel() {
 		return inputPath
 	}
 
-	fun getUnfilteredImage():WorkshopImage {
-		return unfilteredImage!!
+	fun getUnfilteredImage():WorkshopImage? {
+		return unfilteredImage
+	}
+
+	fun getFilteredWithTvImage():WorkshopImage? {
+		return filteredWithTvImage
+	}
+
+	fun getTvEffectSize():Int {
+		return tvEffectSize
 	}
 }

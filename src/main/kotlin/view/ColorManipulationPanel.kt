@@ -23,6 +23,24 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel() {
 		add(applyButton)
 	}
 
+	private fun changeTvEffectSize(rawNewValue:String) {
+		try {
+			val newValue = if (rawNewValue != "") {
+				val temp = rawNewValue.toInt()
+				if (temp < 0) {
+					throw Exception("Can't have negative TV effect size.")
+				}
+				temp
+			}else {
+				0 // If empty, set to 0
+			}
+			println("Changed TV Effect Size from $tvEffectSize to $newValue.")
+
+			model.setTvEffectSize(newValue)
+		}catch(_:Exception) {}
+		tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
+	}
+
 	private fun createTvEffectSizeTextField(): JTextField {
 		val res = JTextField("$tvEffectSize")
 		res.isEnabled = true
@@ -42,23 +60,6 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel() {
 		return res
 	}
 
-	private fun changeTvEffectSize(rawNewValue:String) {
-		try {
-			val newValue = if (rawNewValue != "") {
-				val temp = rawNewValue.toInt()
-				if (temp < 0) {
-					throw Exception("Can't have negative TV effect size.")
-				}
-				temp
-			}else {
-				0 // If empty, set to 0
-			}
-			println("Changed TV Effect Size from $tvEffectSize to $newValue.")
-			tvEffectSize = newValue
-		}catch(_:Exception) {}
-		tvEffectSizeTextField.text = "$tvEffectSize"
-	}
-
 	private fun createApplyButton(): JButton {
 		val res = JButton(
 			StringsManager.get("apply_color_effects")
@@ -67,7 +68,10 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel() {
 		res.isEnabled = true
 
 		res.addActionListener {
-			println("ApplyButton pressed.")
+			if (model.getFilteredWithTvImage() == null) {
+				model.generateFilteredNoTvImage()
+			}
+			model.generateFilteredWithTvImage()
 		}
 
 		return res
