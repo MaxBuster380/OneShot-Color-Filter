@@ -88,14 +88,15 @@ class ExportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 	}
 
 	override fun update() {
-		exportedFilePathTextField.text = if (model.getOutputPath() != "") {
-			model.getOutputPath()
-		}else{
-			StringsManager.get("no_output_path_selected")
-		}
 		autoGeneratePathCheckBox.isSelected = checkedAutoGeneratePath
 		pickExportDirectoryButton.isEnabled = !checkedAutoGeneratePath
 		exportImageButton.isEnabled = model.getFilteredWithTvImage() != null
+
+		exportedFilePathTextField.text = if (model.getOutputPath() != "") {
+			model.getOutputPath()
+		}else{
+			StringsManager.get("no_output_path_picked")
+		}
 	}
 
 }

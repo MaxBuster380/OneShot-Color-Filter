@@ -12,8 +12,8 @@ class SwingModel {
 		const val DEFAULT_TV_EFFECT_SIZE = 2
 	}
 
-	private var inputPath:String = ""
-	private var outputPath:String = ""
+	private var inputFile:File? = null
+	private var outputFile:File? = null
 	private var tvEffectSize = DEFAULT_TV_EFFECT_SIZE
 	private var autoGenerateOutputPath = true
 
@@ -29,15 +29,14 @@ class SwingModel {
 		propertyChange.addPropertyChangeListener(listener)
 	}
 
-	fun setInputPath(newValue:String) {
-		val oldValue = inputPath
-		inputPath = newValue
-		propertyChange.firePropertyChange("inputPath", oldValue, newValue)
+	fun setInputPath(path:String) {
+		inputFile = File(path)
+		propertyChange.firePropertyChange("inputPath", "", "")
 		loadUnfilteredImage()
 	}
 
-	fun setOutputPath(source:String) {
-		outputPath = source
+	fun setOutputPath(path:String) {
+		outputFile = File(path)
 	}
 
 	fun setTvEffectSize(newValue:Int) {
@@ -53,9 +52,9 @@ class SwingModel {
 	}
 
 	fun loadUnfilteredImage() {
-		assert(inputPath != "")
+		assert(inputFile != null)
 
-		unfilteredImage = FileFetcher.loadImage(inputPath)
+		unfilteredImage = FileFetcher.loadImage(getInputPath())
 		filteredNoTvImage = null
 		filteredWithTvImage = null
 		propertyChange.firePropertyChange("unfilteredImage", null, null)
@@ -65,10 +64,6 @@ class SwingModel {
 		assert(unfilteredImage != null)
 
 		filteredNoTvImage = ColorFilterApplier.applyOnImage(unfilteredImage!!, rGBCube)
-	}
-
-	fun generateOutputPath() {
-		assert(inputPath != "")
 	}
 
 	fun generateFilteredWithTvImage() {
@@ -82,11 +77,15 @@ class SwingModel {
 	fun saveFilteredWithTvImage() {
 		assert(filteredWithTvImage != null)
 
-		filteredWithTvImage!!.save(outputPath)
+		filteredWithTvImage!!.save(getOutputPath())
 	}
 
 	fun getInputPath():String {
-		return inputPath
+		return if (inputFile != null) {
+			inputFile!!.absolutePath
+		}else{
+			""
+		}
 	}
 
 	fun getUnfilteredImage():WorkshopImage? {
@@ -102,6 +101,10 @@ class SwingModel {
 	}
 
 	fun getOutputPath():String {
-		return outputPath
+		return if (outputFile != null) {
+			outputFile!!.absolutePath
+		}else{
+			""
+		}
 	}
 }

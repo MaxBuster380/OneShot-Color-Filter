@@ -18,7 +18,7 @@ class StringsManager {
 			assert(rawStrings != null)
 			val earlyRes = rawStrings!!.get(name)
 
-			return if (!earlyRes.isJsonNull) {
+			return if (earlyRes != null) {
 				earlyRes.asString
 			}else{
 				"STRING \"$name\" NOT FOUND"

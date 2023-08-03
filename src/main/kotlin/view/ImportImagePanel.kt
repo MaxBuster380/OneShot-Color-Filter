@@ -21,12 +21,12 @@ class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 
 		add(importedFilePathTextField)
 		add(pickNewFileButton)
+
+		update()
 	}
 
 	private fun createImportedFilePathTextField():JTextField {
-		val res = JTextField(
-			StringsManager.get("no_input_file_picked")
-		)
+		val res = JTextField()
 		res.isEnabled = false
 
 		return res
@@ -56,7 +56,7 @@ class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 	}
 
 	override fun update() {
-		importedFilePathTextField.text  = if (model.getInputPath() != "") {
+		importedFilePathTextField.text = if (model.getInputPath() != "") {
 			model.getInputPath()
 		}else{
 			StringsManager.get("no_input_file_picked")
