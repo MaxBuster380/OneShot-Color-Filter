@@ -1,26 +1,28 @@
 package view
 
 import model.applicationfunctions.SwingModel
-import java.awt.Color
 import java.awt.GridLayout
 import java.awt.event.FocusEvent
 import java.awt.event.FocusListener
+import java.beans.PropertyChangeEvent
+import java.beans.PropertyChangeListener
 import javax.swing.*
 
 
-class ColorManipulationPanel(private val model: SwingModel): JPanel() {
+class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyChangeListener, UpdatableComponent {
 
 	private val tvEffectSizeTextField = createTvEffectSizeTextField()
 	private val applyButton = createApplyButton()
 
-	private var tvEffectSize:Int
-
 	init {
+		model.addPropertyChangeListener(this)
+
 		layout = GridLayout(2,1)
 
-		tvEffectSize = SwingModel.DEFAULT_TV_EFFECT_SIZE
 		add(createTvEffectSizePanel())
 		add(applyButton)
+
+		update()
 	}
 
 	private fun changeTvEffectSize(rawNewValue:String) {
@@ -34,7 +36,6 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel() {
 			}else {
 				0 // If empty, set to 0
 			}
-			println("Changed TV Effect Size from $tvEffectSize to $newValue.")
 
 			model.setTvEffectSize(newValue)
 		}catch(_:Exception) {}
@@ -42,8 +43,7 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel() {
 	}
 
 	private fun createTvEffectSizeTextField(): JTextField {
-		val res = JTextField("$tvEffectSize")
-		res.isEnabled = true
+		val res = JTextField()
 
 		res.addFocusListener(object : FocusListener {
 			override fun focusGained(e: FocusEvent?) {}
@@ -65,8 +65,6 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel() {
 			StringsManager.get("apply_color_effects")
 		)
 
-		res.isEnabled = true
-
 		res.addActionListener {
 			if (model.getFilteredWithTvImage() == null) {
 				model.generateFilteredNoTvImage()
@@ -87,5 +85,18 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel() {
 		)
 		res.add(tvEffectSizeTextField)
 		return res
+	}
+
+	override fun propertyChange(evt: PropertyChangeEvent?) {
+		val propertiesToUpdateOn = listOf("tvEffectSize", "unfilteredImage")
+		if (evt!!.propertyName in propertiesToUpdateOn) {
+			update()
+		}
+	}
+
+	override fun update() {
+		tvEffectSizeTextField.isEnabled = true
+		tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
+		applyButton.isEnabled = model.getUnfilteredImage() != null
 	}
 }

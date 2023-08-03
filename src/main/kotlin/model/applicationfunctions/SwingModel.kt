@@ -7,7 +7,7 @@ import java.beans.PropertyChangeSupport
 import java.io.File
 import java.lang.Exception
 
-class SwingModel() {
+class SwingModel {
 	companion object {
 		const val DEFAULT_TV_EFFECT_SIZE = 2
 	}
@@ -40,10 +40,12 @@ class SwingModel() {
 		outputPath = source
 	}
 
-	fun setTvEffectSize(source:Int) {
-		assert(source >= 0)
+	fun setTvEffectSize(newValue:Int) {
+		assert(newValue >= 0)
 
-		tvEffectSize = source
+		val oldValue = tvEffectSize
+		tvEffectSize = newValue
+		propertyChange.firePropertyChange("tvEffectSize", oldValue, newValue)
 	}
 
 	fun setAutoGenerateOutputPath(source:Boolean) {
@@ -97,5 +99,9 @@ class SwingModel() {
 
 	fun getTvEffectSize():Int {
 		return tvEffectSize
+	}
+
+	fun getOutputPath():String {
+		return outputPath
 	}
 }

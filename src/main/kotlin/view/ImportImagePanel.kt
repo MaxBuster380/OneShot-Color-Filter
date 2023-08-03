@@ -10,7 +10,7 @@ import javax.swing.JButton
 import javax.swing.JPanel
 import javax.swing.JTextField
 
-class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener {
+class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener,UpdatableComponent {
 
 	private val importedFilePathTextField = createImportedFilePathTextField()
 	private val pickNewFileButton = createPickNewFileButton()
@@ -49,13 +49,17 @@ class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 	}
 
 	override fun propertyChange(evt: PropertyChangeEvent) {
-		if (evt.propertyName != "inputPath") {
-			val newPath = model.getInputPath()
-			importedFilePathTextField.text  = if (newPath != "") {
-				newPath
-			}else{
-				StringsManager.get("no_input_file_picked")
-			}
+		val propertiesToUpdateOn = listOf("inputPath")
+		if (evt.propertyName in propertiesToUpdateOn) {
+			update()
+		}
+	}
+
+	override fun update() {
+		importedFilePathTextField.text  = if (model.getInputPath() != "") {
+			model.getInputPath()
+		}else{
+			StringsManager.get("no_input_file_picked")
 		}
 	}
 }

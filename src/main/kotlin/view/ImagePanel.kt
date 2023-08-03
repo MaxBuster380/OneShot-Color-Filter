@@ -3,6 +3,7 @@ package view
 import model.applicationfunctions.SwingModel
 import model.applicationfunctions.WorkshopImage
 import java.awt.Dimension
+import java.awt.FlowLayout
 import java.awt.GridLayout
 import java.awt.Image
 import java.beans.PropertyChangeEvent
@@ -13,12 +14,12 @@ import javax.swing.JPanel
 import kotlin.math.min
 
 
-class ImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener {
+class ImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener,UpdatableComponent {
 
 	private val imageLabel = JLabel()
 	init {
 		model.addPropertyChangeListener(this)
-		layout = GridLayout(1,1)
+		layout = FlowLayout()
 		preferredSize = Dimension(632, height)
 		add(imageLabel)
 	}
@@ -46,11 +47,17 @@ class ImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener 
 	}
 
 	override fun propertyChange(evt: PropertyChangeEvent) {
-		if (evt.propertyName == "unfilteredImage") {
-			displayImage(model.getUnfilteredImage()!!)
+		val propertiesToUpdateOn = listOf("unfilteredImage", "filteredWithTvImage")
+		if (evt.propertyName in propertiesToUpdateOn) {
+			update()
 		}
-		if (evt.propertyName == "filteredWithTvImage") {
-			displayImage(model.getFilteredWithTvImage()!!)
+	}
+
+	override fun update() {
+		val imageToDisplay = model.getFilteredWithTvImage() ?: model.getUnfilteredImage()
+
+		if (imageToDisplay != null) {
+			displayImage(imageToDisplay)
 		}
 	}
 }
