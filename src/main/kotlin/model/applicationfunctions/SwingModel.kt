@@ -30,9 +30,11 @@ class SwingModel {
 	}
 
 	fun setInputPath(path:String) {
+		val oldValue = getInputPath()
 		inputFile = File(path)
-		propertyChange.firePropertyChange("inputPath", "", "")
+		val newValue = getInputPath()
 		loadUnfilteredImage()
+		propertyChange.firePropertyChange("inputPath", oldValue, newValue)
 	}
 
 	fun setOutputPath(path:String) {
