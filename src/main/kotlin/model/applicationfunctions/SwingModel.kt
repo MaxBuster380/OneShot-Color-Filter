@@ -38,7 +38,10 @@ class SwingModel {
 	}
 
 	fun setOutputPath(path:String) {
+		val oldValue = getOutputPath()
 		outputFile = File(path)
+		val newValue = getOutputPath()
+		propertyChange.firePropertyChange("outputPath",oldValue,newValue)
 	}
 
 	fun setTvEffectSize(newValue:Int) {
@@ -108,5 +111,9 @@ class SwingModel {
 		}else{
 			""
 		}
+	}
+
+	fun getInputFile():File? {
+		return inputFile
 	}
 }
