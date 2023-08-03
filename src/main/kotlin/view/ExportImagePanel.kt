@@ -18,11 +18,11 @@ class ExportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 
 	init {
 		model.addPropertyChangeListener(this)
-		layout = GridLayout(4,1)
+		layout = GridLayout(2,1)
 
 		add(exportedFilePathTextField)
-		add(pickExportDirectoryButton)
-		add(createAutoPathPanel())
+		//add(pickExportDirectoryButton)
+		//add(createAutoPathPanel())
 		add(exportImageButton)
 
 		update()
