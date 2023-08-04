@@ -1,6 +1,7 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import view.recolored_ui.OSCFButton
 import java.awt.BorderLayout
 import java.awt.GridLayout
 import javax.swing.JButton
@@ -25,7 +26,7 @@ class HeaderPanel(model: SwingModel): JPanel() {
 	}
 
 	private fun createRepositoryButton(): JButton {
-		val res = JButton(
+		val res = OSCFButton(
 			StringsManager.get("go_to_repository")
 		)
 

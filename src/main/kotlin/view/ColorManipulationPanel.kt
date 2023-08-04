@@ -1,6 +1,7 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import view.recolored_ui.OSCFButton
 import java.awt.GridLayout
 import java.awt.event.FocusEvent
 import java.awt.event.FocusListener
@@ -69,7 +70,7 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyC
 	}
 
 	private fun createApplyButton(): JButton {
-		val res = JButton(
+		val res = OSCFButton(
 			StringsManager.get("apply_color_effects")
 		)
 

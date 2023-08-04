@@ -1,6 +1,7 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import view.recolored_ui.OSCFButton
 import java.awt.FlowLayout
 import java.awt.GridLayout
 import java.beans.PropertyChangeEvent
@@ -84,7 +85,7 @@ class ExportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 	}
 
 	private fun createExportImageButton(): JButton {
-		val res = JButton(StringsManager.get("export_image"))
+		val res = OSCFButton(StringsManager.get("export_image"))
 
 		res.isEnabled = true
 

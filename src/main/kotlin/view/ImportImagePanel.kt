@@ -2,6 +2,7 @@ package view
 
 import model.applicationfunctions.FileFetcher
 import model.applicationfunctions.SwingModel
+import view.recolored_ui.OSCFButton
 import java.awt.Frame
 import java.awt.GridLayout
 import java.beans.PropertyChangeEvent
@@ -34,7 +35,7 @@ class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 	}
 
 	private fun createPickNewFileButton(): JButton {
-		val res = JButton(
+		val res = OSCFButton(
 			StringsManager.get("pick_input_file")
 		)
 
