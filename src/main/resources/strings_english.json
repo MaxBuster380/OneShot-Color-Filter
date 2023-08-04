@@ -15,5 +15,7 @@
     "message_changed_tf_effect_size": "New TV effect size selected.",
     "message_working": "Currently working, please wait...",
     "message_done_applying": "Finished applying the filter.",
-    "message_exported": "Image successfully exported."
+    "message_exported": "Image successfully exported.",
+    "message_import_failed": "The image couldn't be imported. Encountered",
+    "message_export_failed": "The image couldn't be exported. Encountered"
 }

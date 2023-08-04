@@ -57,10 +57,14 @@ class SwingModel {
 	fun loadUnfilteredImage() {
 		assert(inputFile != null)
 
-		unfilteredImage = FileFetcher.loadImage(getInputPath())
-		filteredNoTvImage = null
-		filteredWithTvImage = null
-		propertyChange.firePropertyChange("unfilteredImage", null, null)
+		try {
+			unfilteredImage = FileFetcher.loadImage(getInputPath())
+			filteredNoTvImage = null
+			filteredWithTvImage = null
+			propertyChange.firePropertyChange("unfilteredImage", null, null)
+		}catch(e:Exception) {
+			propertyChange.firePropertyChange("import_failure", null, e)
+		}
 	}
 
 	fun generateFilteredImage(progressBar: JProgressBar) {
@@ -90,8 +94,12 @@ class SwingModel {
 	fun saveFilteredWithTvImage() {
 		assert(filteredWithTvImage != null)
 
-		filteredWithTvImage!!.save(getOutputPath())
-		propertyChange.firePropertyChange("export", 0, 1)
+		try {
+			filteredWithTvImage!!.save(getOutputPath())
+			propertyChange.firePropertyChange("export", 0, 1)
+		}catch(e:Exception) {
+			propertyChange.firePropertyChange("failure_export",null, e)
+		}
 	}
 
 	fun getInputPath():String {

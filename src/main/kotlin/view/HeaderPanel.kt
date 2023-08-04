@@ -1,10 +1,12 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import java.awt.BorderLayout
 import java.awt.GridLayout
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
+import javax.swing.border.Border
 
 class HeaderPanel(model: SwingModel): JPanel() {
 	init {
@@ -45,9 +47,9 @@ class HeaderPanel(model: SwingModel): JPanel() {
 
 		res.layout = GridLayout(1,3)
 
-		add(createTitleLabel())
-		add(JPanel())
-		add(createRepositoryButton())
+		res.add(createTitleLabel())
+		res.add(JPanel())
+		res.add(createRepositoryButton())
 
 		return res
 	}

@@ -51,7 +51,7 @@ class ColorFilterApplier() {
 				}
 			}
 
-			val progressUpdate = 30000
+			val progressUpdate = unionFindForrest.size / 100
 			var progressIterator = 0
 			var allProgress = 0
 			// Calculate the color of the representatives
