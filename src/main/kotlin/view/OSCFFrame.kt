@@ -2,6 +2,7 @@ package view
 
 import model.applicationfunctions.SwingModel
 import java.awt.BorderLayout
+import javax.swing.ImageIcon
 import javax.swing.JFrame
 
 
@@ -17,6 +18,8 @@ class OSCFFrame: JFrame() {
 		setSize(WIDTH, HEIGHT)
 		isResizable = false
 
+		createIconImage()
+
 		layout = BorderLayout()
 		add(HeaderPanel(model), BorderLayout.NORTH)
 		add(WindowPanel(model), BorderLayout.CENTER)
@@ -24,5 +27,10 @@ class OSCFFrame: JFrame() {
 		defaultCloseOperation = DISPOSE_ON_CLOSE
 
 		isVisible = true
+	}
+
+	private fun createIconImage() {
+		val img = ImageIcon(this::class.java.classLoader.getResource("application_icon.png"))
+		iconImage = img.image
 	}
 }
