@@ -7,31 +7,15 @@ This project aims to make it possible to add that exact filter to any image.
 
 While this project is under MIT license, credit given is appreciated.
 
-To use this project, you may use any IDE that can run Kotlin and can take keyboard inputs. IntelliJ IDEA Community Version works and is free (https://www.jetbrains.com/idea/).
+Download the latest "OneShot-Color-Filter.jar" release, or run the source code in an IDE that supports Kotlin development.
 
-A command invite will show. You have these options :
+You are then presented a window where you can :
+ - load the image you want to work on.
+ - apply the color filter
+ - change the TV effect size
+ - export the produced image.
 
-help
-	- Shows this list.
+Currently, you can only export to the same directory as the input image.
 
-apply [input image path] [output image path]
-	- Apply the World Machine color filter on an image
-	If no output path is given, the file will be created in the same directory as the input.
-
-stt [integer] 
-	- Sets the thickness of the TV effect, in number of pixels.
-	For no effect, input 0.
-
-credits
-	- Shows the app's credits.
-
-quit
-	- Close the app.
-	
-
-Example of use :
-
-> stt 2
-
-> apply C:\Users\User\Pictures\Niko.png
+This project currently works on Windows, probably works on Linux operating systems.
 	
