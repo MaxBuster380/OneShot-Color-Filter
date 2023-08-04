@@ -1,4 +1,4 @@
-# WorldMachine-Color-Filter
+# OneShot-Color-Filter
 
 OneShot is a game created by Future Cat.
 In it, there is a character called "The World Machine".
