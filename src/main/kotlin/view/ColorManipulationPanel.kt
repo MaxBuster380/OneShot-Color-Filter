@@ -2,6 +2,7 @@ package view
 
 import model.applicationfunctions.SwingModel
 import view.recolored_ui.OSCFButton
+import view.recolored_ui.OSCFPanel
 import java.awt.GridLayout
 import java.awt.event.FocusEvent
 import java.awt.event.FocusListener
@@ -10,7 +11,7 @@ import java.beans.PropertyChangeListener
 import javax.swing.*
 
 
-class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyChangeListener, UpdatableComponent {
+class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), PropertyChangeListener, UpdatableComponent {
 
 	private val tvEffectSizeTextField = createTvEffectSizeTextField()
 	private val progressBar = createProgressBar()
@@ -82,7 +83,7 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyC
 	}
 
 	private fun createTvEffectSizePanel():JPanel {
-		val res = JPanel()
+		val res = OSCFPanel()
 		res.layout = GridLayout(2,1)
 		res.add(
 			JLabel(

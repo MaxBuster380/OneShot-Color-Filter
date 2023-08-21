@@ -1,6 +1,7 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import view.recolored_ui.OSCFPanel
 import java.awt.Color
 import java.awt.FlowLayout
 import java.awt.GridLayout
@@ -10,7 +11,7 @@ import javax.swing.BorderFactory
 import javax.swing.JLabel
 import javax.swing.JPanel
 
-class MessageLabel(private val model:SwingModel): JPanel(), PropertyChangeListener{
+class MessageLabel(private val model:SwingModel): OSCFPanel(), PropertyChangeListener{
 
 	private val messageLabel = createMessageLabel()
 	init {

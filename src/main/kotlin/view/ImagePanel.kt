@@ -2,6 +2,7 @@ package view
 
 import model.applicationfunctions.SwingModel
 import model.applicationfunctions.WorkshopImage
+import view.recolored_ui.OSCFPanel
 import java.awt.Dimension
 import java.awt.FlowLayout
 import java.awt.GridLayout
@@ -14,7 +15,7 @@ import javax.swing.JPanel
 import kotlin.math.min
 
 
-class ImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener,UpdatableComponent {
+class ImagePanel(private val model: SwingModel): OSCFPanel(),PropertyChangeListener,UpdatableComponent {
 
 	private val imageLabel = JLabel()
 	init {

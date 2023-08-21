@@ -2,13 +2,14 @@ package view
 
 import model.applicationfunctions.SwingModel
 import view.recolored_ui.OSCFButton
+import view.recolored_ui.OSCFPanel
 import java.awt.FlowLayout
 import java.awt.GridLayout
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.swing.*
 
-class ExportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener,UpdatableComponent {
+class ExportImagePanel(private val model: SwingModel): OSCFPanel(),PropertyChangeListener,UpdatableComponent {
 
 	private val exportedFilePathTextField = createExportedFilePathTextField()
 	private val pickExportDirectoryButton = createPickExportDirectoryButton()
@@ -22,8 +23,6 @@ class ExportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 		layout = GridLayout(2,1)
 
 		add(exportedFilePathTextField)
-		//add(pickExportDirectoryButton)
-		//add(createAutoPathPanel())
 		add(exportImageButton)
 
 		update()
@@ -97,7 +96,7 @@ class ExportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 	}
 
 	private fun createAutoPathPanel():JPanel {
-		val res = JPanel()
+		val res = OSCFPanel()
 		res.layout = FlowLayout()
 		res.add(autoGeneratePathCheckBox)
 		res.add(
