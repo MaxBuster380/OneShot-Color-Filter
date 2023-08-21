@@ -17,16 +17,24 @@ class WorkshopImage(
 	}
 	fun setColorOf(element : UnionFind<TwoDVector>, color : Int) {
 		val vector = element.getValue()
+		setColorOf(vector, color)
+	}
+
+	fun setColorOf(vector : TwoDVector, color : Int) {
 		val x = vector.getComp(0)
 		val y = vector.getComp(1)
 		bufferedImage.setRGB(x,y,color)
 	}
 
 	fun colorOf(element : UnionFind<TwoDVector>):Int {
-		val vector = element.getValue()
+		return colorOf(element.getValue())
+	}
+
+	fun colorOf(vector : TwoDVector):Int {
 		val x = vector.getComp(0)
 		val y = vector.getComp(1)
 		return bufferedImage.getRGB(x,y)
+
 	}
 
 	fun save(pathOut:String) {
