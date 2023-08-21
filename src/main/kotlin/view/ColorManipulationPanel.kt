@@ -4,6 +4,7 @@ import model.applicationfunctions.SwingModel
 import view.recolored_ui.OSCFButton
 import view.recolored_ui.OSCFLabel
 import view.recolored_ui.OSCFPanel
+import view.recolored_ui.OSCFTextField
 import java.awt.GridLayout
 import java.awt.event.FocusEvent
 import java.awt.event.FocusListener
@@ -54,7 +55,7 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 	}
 
 	private fun createTvEffectSizeTextField(): JTextField {
-		val res = JTextField()
+		val res = OSCFTextField()
 
 		res.addFocusListener(object : FocusListener {
 			override fun focusGained(e: FocusEvent?) {}

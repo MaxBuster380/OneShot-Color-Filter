@@ -4,6 +4,7 @@ import model.applicationfunctions.FileFetcher
 import model.applicationfunctions.SwingModel
 import view.recolored_ui.OSCFButton
 import view.recolored_ui.OSCFPanel
+import view.recolored_ui.OSCFTextField
 import java.awt.GridLayout
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
@@ -26,7 +27,7 @@ class ImportImagePanel(private val model: SwingModel):OSCFPanel(),PropertyChange
 	}
 
 	private fun createImportedFilePathTextField():JTextField {
-		val res = JTextField()
+		val res = OSCFTextField()
 		res.isEnabled = true
 		res.isEditable = false
 

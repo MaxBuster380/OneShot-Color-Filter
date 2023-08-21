@@ -4,6 +4,7 @@ import model.applicationfunctions.SwingModel
 import view.recolored_ui.OSCFButton
 import view.recolored_ui.OSCFLabel
 import view.recolored_ui.OSCFPanel
+import view.recolored_ui.OSCFTextField
 import java.awt.FlowLayout
 import java.awt.GridLayout
 import java.beans.PropertyChangeEvent
@@ -56,7 +57,7 @@ class ExportImagePanel(private val model: SwingModel): OSCFPanel(),PropertyChang
 	}
 
 	private fun createExportedFilePathTextField():JTextField {
-		val res = JTextField()
+		val res = OSCFTextField()
 		res.isEnabled = true
 		res.isEditable = false
 
