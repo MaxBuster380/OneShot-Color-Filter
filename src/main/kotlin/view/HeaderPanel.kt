@@ -2,13 +2,12 @@ package view
 
 import model.applicationfunctions.SwingModel
 import view.recolored_ui.OSCFButton
+import view.recolored_ui.OSCFLabel
 import view.recolored_ui.OSCFPanel
-import java.awt.BorderLayout
 import java.awt.GridLayout
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
-import javax.swing.border.Border
 
 class HeaderPanel(model: SwingModel): OSCFPanel() {
 	init {
@@ -19,7 +18,7 @@ class HeaderPanel(model: SwingModel): OSCFPanel() {
 	}
 
 	private fun createTitleLabel():JLabel {
-		val res = JLabel(
+		val res = OSCFLabel(
 			StringsManager.get("application_title")
 		)
 		res.isEnabled = true

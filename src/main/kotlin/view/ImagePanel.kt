@@ -2,22 +2,20 @@ package view
 
 import model.applicationfunctions.SwingModel
 import model.applicationfunctions.WorkshopImage
+import view.recolored_ui.OSCFLabel
 import view.recolored_ui.OSCFPanel
 import java.awt.Dimension
 import java.awt.FlowLayout
-import java.awt.GridLayout
 import java.awt.Image
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.swing.ImageIcon
-import javax.swing.JLabel
-import javax.swing.JPanel
 import kotlin.math.min
 
 
 class ImagePanel(private val model: SwingModel): OSCFPanel(),PropertyChangeListener,UpdatableComponent {
 
-	private val imageLabel = JLabel()
+	private val imageLabel = OSCFLabel()
 	init {
 		model.addPropertyChangeListener(this)
 		layout = FlowLayout()

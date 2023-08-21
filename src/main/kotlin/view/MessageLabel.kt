@@ -1,15 +1,11 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import view.recolored_ui.OSCFLabel
 import view.recolored_ui.OSCFPanel
-import java.awt.Color
-import java.awt.FlowLayout
-import java.awt.GridLayout
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
-import javax.swing.BorderFactory
 import javax.swing.JLabel
-import javax.swing.JPanel
 
 class MessageLabel(private val model:SwingModel): OSCFPanel(), PropertyChangeListener{
 
@@ -20,7 +16,7 @@ class MessageLabel(private val model:SwingModel): OSCFPanel(), PropertyChangeLis
 	}
 
 	private fun createMessageLabel():JLabel {
-		val res = JLabel(
+		val res = OSCFLabel(
 			StringsManager.get("message_app_started")
 		)
 

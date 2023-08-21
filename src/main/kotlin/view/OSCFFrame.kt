@@ -5,7 +5,6 @@ import java.awt.BorderLayout
 import javax.swing.ImageIcon
 import javax.swing.JFrame
 
-
 class OSCFFrame: JFrame() {
 	companion object {
 		const val WIDTH = 809

@@ -4,12 +4,10 @@ import model.applicationfunctions.FileFetcher
 import model.applicationfunctions.SwingModel
 import view.recolored_ui.OSCFButton
 import view.recolored_ui.OSCFPanel
-import java.awt.Frame
 import java.awt.GridLayout
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.swing.JButton
-import javax.swing.JPanel
 import javax.swing.JTextField
 
 class ImportImagePanel(private val model: SwingModel):OSCFPanel(),PropertyChangeListener,UpdatableComponent {

@@ -2,6 +2,7 @@ package view
 
 import model.applicationfunctions.SwingModel
 import view.recolored_ui.OSCFButton
+import view.recolored_ui.OSCFLabel
 import view.recolored_ui.OSCFPanel
 import java.awt.GridLayout
 import java.awt.event.FocusEvent
@@ -86,7 +87,7 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 		val res = OSCFPanel()
 		res.layout = GridLayout(2,1)
 		res.add(
-			JLabel(
+			OSCFLabel (
 				StringsManager.get("set_tv_effect_size")
 			)
 		)

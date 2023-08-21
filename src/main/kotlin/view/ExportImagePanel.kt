@@ -2,6 +2,7 @@ package view
 
 import model.applicationfunctions.SwingModel
 import view.recolored_ui.OSCFButton
+import view.recolored_ui.OSCFLabel
 import view.recolored_ui.OSCFPanel
 import java.awt.FlowLayout
 import java.awt.GridLayout
@@ -100,7 +101,7 @@ class ExportImagePanel(private val model: SwingModel): OSCFPanel(),PropertyChang
 		res.layout = FlowLayout()
 		res.add(autoGeneratePathCheckBox)
 		res.add(
-			JLabel(
+			OSCFLabel(
 				StringsManager.get("option_auto_generate_output_path")
 			)
 		)
