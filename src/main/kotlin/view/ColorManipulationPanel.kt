@@ -1,10 +1,7 @@
 package view
 
 import model.applicationfunctions.SwingModel
-import view.recolored_ui.OSCFButton
-import view.recolored_ui.OSCFLabel
-import view.recolored_ui.OSCFPanel
-import view.recolored_ui.OSCFTextField
+import view.recolored_ui.*
 import java.awt.GridLayout
 import java.awt.event.FocusEvent
 import java.awt.event.FocusListener
@@ -49,7 +46,7 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 	}
 
 	private fun createProgressBar():JProgressBar {
-		val res = JProgressBar()
+		val res = OSCFProgressBar()
 		res.value = 0
 		return res
 	}
