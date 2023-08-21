@@ -12,25 +12,33 @@ class OSCFButton(text: String) : JButton(text) {
 		val HOVERED_COLOR = Color(80,80,80)
 		val CLICKED_COLOR = Color(64,64,64)
 		val DISABLED_COLOR = Color(144,144,144)
+		val ENABLED_TEXT_COLOR = Color.WHITE
+		val DISABLED_TEXT_COLOR = Color(192,192,192)
 	}
 
 	init {
 		border = BorderFactory.createEmptyBorder()
-		super.setContentAreaFilled(false)
+		super.setContentAreaFilled(true)
 	}
 
-	override fun paintComponents(g: Graphics) {
-		if (isEnabled) {
-			g.color = DISABLED_COLOR
+	override fun paintComponent(g: Graphics) {
+		super.paintComponent(g)
+
+		background = if (!isEnabled) {
+			DISABLED_COLOR
 		} else if (getModel().isPressed) {
-			g.color = CLICKED_COLOR
+			CLICKED_COLOR
 		} else if (getModel().isRollover) {
-			g.color = HOVERED_COLOR
+			HOVERED_COLOR
 		} else {
-			g.color = UNHOVERED_COLOR
+			UNHOVERED_COLOR
 		}
-		g.fillRect(0, 0, width, height);
-		super.paintComponents(g)
+
+		foreground = if (isEnabled) {
+			ENABLED_TEXT_COLOR
+		} else {
+			DISABLED_TEXT_COLOR
+		}
 	}
 
 	override fun setContentAreaFilled(b: Boolean) {}
