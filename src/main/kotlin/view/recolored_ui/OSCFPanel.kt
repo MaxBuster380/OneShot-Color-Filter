@@ -7,7 +7,7 @@ import javax.swing.JPanel
 
 open class OSCFPanel : JPanel() {
 	companion object {
-		val BACKGROUND_COLOR = Color(	42,42,42)
+		val BACKGROUND_COLOR = OSCFColors.BACKGROUND
 	}
 
 	init {

@@ -7,8 +7,8 @@ import javax.swing.JLabel
 
 class OSCFLabel(text:String) : JLabel(text) {
 	companion object {
-		val BACKGROUND_COLOR = Color(	42,42,42)
-		val TEXT_COLOR = Color.WHITE
+		val BACKGROUND_COLOR = OSCFColors.BACKGROUND
+		val TEXT_COLOR = OSCFColors.TEXT
 	}
 
 	constructor():this("")

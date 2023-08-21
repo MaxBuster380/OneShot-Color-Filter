@@ -21,6 +21,7 @@ class HeaderPanel(model: SwingModel): OSCFPanel() {
 		val res = OSCFLabel(
 			StringsManager.get("application_title")
 		)
+		res.text = res.text.uppercase()
 		res.isEnabled = true
 		return res
 	}

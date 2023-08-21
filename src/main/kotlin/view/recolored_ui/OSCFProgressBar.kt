@@ -7,8 +7,8 @@ import javax.swing.JProgressBar
 
 class OSCFProgressBar() : JProgressBar() {
 	companion object {
-		val FOREGROUND_COLOR = Color.BLACK
-		val BACKGROUND_COLOR = Color.GREEN
+		val FOREGROUND_COLOR = Color(60,60,75)
+		val BACKGROUND_COLOR = Color(85,85,85)
 	}
 
 	init {
@@ -20,5 +20,6 @@ class OSCFProgressBar() : JProgressBar() {
 
 		foreground = FOREGROUND_COLOR
 		background = BACKGROUND_COLOR
+		isBorderPainted = false
 	}
 }

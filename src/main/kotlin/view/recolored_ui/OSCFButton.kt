@@ -8,11 +8,11 @@ import javax.swing.JButton
 
 class OSCFButton(text: String) : JButton(text) {
 	companion object {
-		val UNHOVERED_COLOR = Color(96,96,96)
 		val HOVERED_COLOR = Color(80,80,80)
 		val CLICKED_COLOR = Color(64,64,64)
-		val DISABLED_COLOR = Color(144,144,144)
-		val ENABLED_TEXT_COLOR = Color.WHITE
+		val ENABLED_TEXT_COLOR = OSCFColors.TEXT
+		val UNHOVERED_COLOR = Color(96,96,96)
+		val DISABLED_COLOR = UNHOVERED_COLOR
 		val DISABLED_TEXT_COLOR = Color(192,192,192)
 	}
 
