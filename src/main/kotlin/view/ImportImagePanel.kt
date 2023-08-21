@@ -2,15 +2,16 @@ package view
 
 import model.applicationfunctions.FileFetcher
 import model.applicationfunctions.SwingModel
-import java.awt.Frame
+import view.recolored_ui.OSCFButton
+import view.recolored_ui.OSCFPanel
+import view.recolored_ui.OSCFTextField
 import java.awt.GridLayout
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.swing.JButton
-import javax.swing.JPanel
 import javax.swing.JTextField
 
-class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeListener,UpdatableComponent {
+class ImportImagePanel(private val model: SwingModel):OSCFPanel(),PropertyChangeListener,UpdatableComponent {
 
 	private val importedFilePathTextField = createImportedFilePathTextField()
 	private val pickNewFileButton = createPickNewFileButton()
@@ -26,7 +27,7 @@ class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 	}
 
 	private fun createImportedFilePathTextField():JTextField {
-		val res = JTextField()
+		val res = OSCFTextField()
 		res.isEnabled = true
 		res.isEditable = false
 
@@ -34,7 +35,7 @@ class ImportImagePanel(private val model: SwingModel):JPanel(),PropertyChangeLis
 	}
 
 	private fun createPickNewFileButton(): JButton {
-		val res = JButton(
+		val res = OSCFButton(
 			StringsManager.get("pick_input_file")
 		)
 

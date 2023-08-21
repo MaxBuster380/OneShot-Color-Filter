@@ -1,6 +1,7 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import view.recolored_ui.*
 import java.awt.GridLayout
 import java.awt.event.FocusEvent
 import java.awt.event.FocusListener
@@ -9,7 +10,7 @@ import java.beans.PropertyChangeListener
 import javax.swing.*
 
 
-class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyChangeListener, UpdatableComponent {
+class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), PropertyChangeListener, UpdatableComponent {
 
 	private val tvEffectSizeTextField = createTvEffectSizeTextField()
 	private val progressBar = createProgressBar()
@@ -45,13 +46,13 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyC
 	}
 
 	private fun createProgressBar():JProgressBar {
-		val res = JProgressBar()
+		val res = OSCFProgressBar()
 		res.value = 0
 		return res
 	}
 
 	private fun createTvEffectSizeTextField(): JTextField {
-		val res = JTextField()
+		val res = OSCFTextField()
 
 		res.addFocusListener(object : FocusListener {
 			override fun focusGained(e: FocusEvent?) {}
@@ -69,7 +70,7 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyC
 	}
 
 	private fun createApplyButton(): JButton {
-		val res = JButton(
+		val res = OSCFButton(
 			StringsManager.get("apply_color_effects")
 		)
 
@@ -81,10 +82,10 @@ class ColorManipulationPanel(private val model: SwingModel): JPanel(), PropertyC
 	}
 
 	private fun createTvEffectSizePanel():JPanel {
-		val res = JPanel()
+		val res = OSCFPanel()
 		res.layout = GridLayout(2,1)
 		res.add(
-			JLabel(
+			OSCFLabel (
 				StringsManager.get("set_tv_effect_size")
 			)
 		)

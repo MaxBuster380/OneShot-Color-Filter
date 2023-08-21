@@ -1,14 +1,11 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import view.recolored_ui.OSCFPanel
 import java.awt.BorderLayout
-import java.awt.Color
-import java.awt.Frame
-import javax.swing.BorderFactory
-import javax.swing.JPanel
 
 
-class WindowPanel(model: SwingModel): JPanel() {
+class WindowPanel(model: SwingModel): OSCFPanel() {
 	init {
 		layout = BorderLayout()
 
