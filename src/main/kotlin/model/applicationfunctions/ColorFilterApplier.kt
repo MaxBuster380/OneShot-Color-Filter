@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage
 import java.lang.Exception
 import javax.swing.JProgressBar
 import kotlin.math.roundToInt
+import model.applicationfunctions.ColorIntegerConverter.Companion.copyTransparency
 
 class ColorFilterApplier {
 	companion object {
@@ -59,13 +60,13 @@ class ColorFilterApplier {
 				for (y in 0..<imageHeight) {
 					val currentPixelCoordinates = TwoDVector(x,y)
 					val inputColor = inputImage.colorOf(currentPixelCoordinates)
-
+					//val hashMapKeyColor = copyTransparency(0, inputColor)
 					if (!computedColors.containsKey(inputColor)) {
 						val newColor = calculateColor(inputColor, rGBCube)
 						computedColors[inputColor] = newColor
 					}
-
 					var outputColor = computedColors[inputColor]!!
+
 					outputColor = copyTransparency(inputColor, outputColor)
 
 					outputImage.setColorOf(currentPixelCoordinates, outputColor)
@@ -73,6 +74,10 @@ class ColorFilterApplier {
 				if (progressBar != null) {
 					progressBar.value = (x.toFloat() * 100f / imageWidth.toFloat()).toInt()
 				}
+			}
+
+			if (progressBar != null) {
+				progressBar.value = 100
 			}
 
 			return outputImage
@@ -192,18 +197,6 @@ class ColorFilterApplier {
 
 			val outputVector = applyFilter(rGBCube, inputVector)
 			return ColorIntegerConverter.vectorToIntColor(outputVector)
-		}
-
-		/**
-		 * Adds one color's transparency to another.
-		 * @param donorColor Color to take the transparency from.
-		 * @param recipientColor to apply the transparency onto.
-		 * @return The recipient color with the donor color's transparency.
-		 */
-		private fun copyTransparency(donorColor : Int, recipientColor : Int) : Int {
-			val transparencyMask = 255 shl 24
-			val rgbMask = 0.inv() xor transparencyMask
-			return (transparencyMask and donorColor) or (rgbMask and recipientColor)
 		}
 	}
 }
