@@ -1,6 +1,7 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import view.applicationstates.ApplicationRunner
 import view.recolored_ui.*
 import java.awt.GridLayout
 import java.awt.event.FocusEvent
@@ -8,6 +9,8 @@ import java.awt.event.FocusListener
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.swing.*
+import view.applicationstates.ApplicationEvents.CHANGE_TV_EFFECT_SIZE
+import view.applicationstates.ApplicationEvents.APPLY_FILTER
 
 
 class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), PropertyChangeListener, UpdatableComponent {
@@ -94,15 +97,14 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 	}
 
 	override fun propertyChange(evt: PropertyChangeEvent?) {
-		val propertiesToUpdateOn = listOf("tvEffectSize", "unfilteredImage","working")
-		if (evt!!.propertyName in propertiesToUpdateOn) {
-			update()
-		}
+		update()
 	}
 
 	override fun update() {
-		tvEffectSizeTextField.isEnabled = !model.isWorking()
+		val runner = ApplicationRunner.getInstance()
+		tvEffectSizeTextField.isEnabled = runner.canApply(CHANGE_TV_EFFECT_SIZE)
+		applyButton.isEnabled = runner.canApply(APPLY_FILTER)
+
 		tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
-		applyButton.isEnabled = model.getUnfilteredImage() != null && !model.isWorking()
 	}
 }

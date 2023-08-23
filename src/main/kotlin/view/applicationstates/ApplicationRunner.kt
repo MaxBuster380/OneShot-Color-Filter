@@ -12,16 +12,20 @@ import view.applicationstates.ApplicationStates.NO_FILE
  */
 class ApplicationRunner : Runner {
 
-	// SINGLETON SETUP
-	private var instance : ApplicationRunner? = null
-	/**
-	 * Returns the only instance of ApplicationRunner.
-	 */
-	fun getInstance() : ApplicationRunner {
-		if (instance == null) {
-			instance = ApplicationRunner()
+	companion object {
+
+		// SINGLETON SETUP
+		private var instance: ApplicationRunner? = null
+
+		/**
+		 * Returns the only instance of ApplicationRunner.
+		 */
+		fun getInstance(): ApplicationRunner {
+			if (instance == null) {
+				instance = ApplicationRunner()
+			}
+			return instance!!
 		}
-		return instance!!
 	}
 
 	private val subRunner : Runner
@@ -32,6 +36,11 @@ class ApplicationRunner : Runner {
 	}
 
 	// PUBLIC INSTANCE METHODS
+
+	fun getState() : State {
+		val states = getCurrentStates()
+		return states.iterator().next()
+	}
 
 	// PUBLIC INSTANCE METHODS - INTERFACE Runner
 

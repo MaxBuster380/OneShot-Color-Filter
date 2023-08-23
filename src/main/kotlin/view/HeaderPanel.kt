@@ -50,7 +50,7 @@ class HeaderPanel(model: SwingModel): OSCFPanel() {
 		res.layout = GridLayout(1,3)
 
 		res.add(createTitleLabel())
-		res.add(OSCFPanel())
+		res.add(OSCFLabel("1.1.1"))
 		res.add(createRepositoryButton())
 
 		return res
