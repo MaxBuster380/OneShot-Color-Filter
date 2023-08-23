@@ -109,7 +109,7 @@ class ExportImagePanel(private val model: SwingModel): OSCFPanel(),PropertyChang
 		return res
 	}
 	override fun propertyChange(evt: PropertyChangeEvent) {
-		val propertiesToUpdateOn = listOf("outputPath","filteredWithTvImage", "inputPath","working")
+		val propertiesToUpdateOn = listOf("outputPath","filteredWithTvImage", "inputPath","working", "unfilteredImage")
 		if (evt.propertyName in propertiesToUpdateOn) {
 			update()
 		}
