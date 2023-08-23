@@ -60,12 +60,12 @@ class ColorFilterApplier {
 				for (y in 0..<imageHeight) {
 					val currentPixelCoordinates = TwoDVector(x,y)
 					val inputColor = inputImage.colorOf(currentPixelCoordinates)
-					//val hashMapKeyColor = copyTransparency(0, inputColor)
-					if (!computedColors.containsKey(inputColor)) {
-						val newColor = calculateColor(inputColor, rGBCube)
-						computedColors[inputColor] = newColor
+					val hashMapKeyColor = copyTransparency(0, inputColor)
+					if (!computedColors.containsKey(hashMapKeyColor)) {
+						val newColor = calculateColor(hashMapKeyColor, rGBCube)
+						computedColors[hashMapKeyColor] = newColor
 					}
-					var outputColor = computedColors[inputColor]!!
+					var outputColor = computedColors[hashMapKeyColor]!!
 
 					outputColor = copyTransparency(inputColor, outputColor)
 
