@@ -65,7 +65,8 @@ class ColorFilterApplier {
 						computedColors[inputColor] = newColor
 					}
 
-					val outputColor = computedColors[inputColor]!!
+					var outputColor = computedColors[inputColor]!!
+					outputColor = copyTransparency(inputColor, outputColor)
 
 					outputImage.setColorOf(currentPixelCoordinates, outputColor)
 				}
@@ -191,6 +192,18 @@ class ColorFilterApplier {
 
 			val outputVector = applyFilter(rGBCube, inputVector)
 			return ColorIntegerConverter.vectorToIntColor(outputVector)
+		}
+
+		/**
+		 * Adds one color's transparency to another.
+		 * @param donorColor Color to take the transparency from.
+		 * @param recipientColor to apply the transparency onto.
+		 * @return The recipient color with the donor color's transparency.
+		 */
+		private fun copyTransparency(donorColor : Int, recipientColor : Int) : Int {
+			val transparencyMask = 255 shl 24
+			val rgbMask = 0.inv() xor transparencyMask
+			return (transparencyMask and donorColor) or (rgbMask and recipientColor)
 		}
 	}
 }
