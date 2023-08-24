@@ -18,5 +18,6 @@
     "message_import_failed": "The image couldn't be imported. Encountered",
     "message_export_failed": "The image couldn't be exported. Encountered",
     "parameters_title" : "Parameters",
-    "parameters_menu_button" : "Parameters"
+    "parameters_menu_button" : "Parameters",
+    "confirm_parameters_change_button" : "Confirm changes"
 }

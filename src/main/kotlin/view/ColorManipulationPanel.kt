@@ -15,7 +15,6 @@ import view.applicationstates.ApplicationEvents.APPLY_FILTER
 
 class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), PropertyChangeListener, UpdatableComponent {
 
-	//private val tvEffectSizeTextField = createTvEffectSizeTextField()
 	private val parameterMenuButton = createParameterMenuButton()
 	private val progressBar = createProgressBar()
 	private val applyButton = createApplyButton()
@@ -25,31 +24,12 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 
 		layout = GridLayout(3,1)
 
-		add(createTvEffectSizePanel())
+		add(parameterMenuButton)
 		add(progressBar)
 		add(applyButton)
 
 		update()
 	}
-
-	/*
-	private fun changeTvEffectSize(rawNewValue:String) {
-		try {
-			val newValue = if (rawNewValue != "") {
-				val temp = rawNewValue.toInt()
-				if (temp < 0) {
-					throw Exception("Can't have negative TV effect size.")
-				}
-				temp
-			}else {
-				0 // If empty, set to 0
-			}
-
-			model.setTvEffectSize(newValue)
-		}catch(_:Exception) {}
-		/tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
-	}
-	*/
 
 	private fun createParameterMenuButton() : JButton {
 		val res = OSCFButton(
@@ -69,26 +49,6 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 		return res
 	}
 
-	/*
-	private fun createTvEffectSizeTextField(): JTextField {
-		val res = OSCFTextField()
-
-		res.addFocusListener(object : FocusListener {
-			override fun focusGained(e: FocusEvent?) {}
-
-			override fun focusLost(e: FocusEvent?) {
-				changeTvEffectSize(res.text)
-			}
-		})
-
-		res.addActionListener {
-			changeTvEffectSize(res.text)
-		}
-
-		return res
-	}
-	*/
-
 	private fun createApplyButton(): JButton {
 		val res = OSCFButton(
 			StringsManager.get("apply_color_effects")
@@ -98,20 +58,6 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 			model.generateFilteredImage(progressBar)
 		}
 
-		return res
-	}
-
-
-	private fun createTvEffectSizePanel():JPanel {
-		val res = OSCFPanel()
-		res.layout = GridLayout(2,1)
-		res.add(
-			OSCFLabel (
-				StringsManager.get("set_tv_effect_size")
-			)
-		)
-		//res.add(tvEffectSizeTextField)
-		res.add(parameterMenuButton)
 		return res
 	}
 
