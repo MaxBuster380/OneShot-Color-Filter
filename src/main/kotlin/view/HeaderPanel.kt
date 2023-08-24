@@ -8,6 +8,7 @@ import java.awt.GridLayout
 import javax.swing.JButton
 import javax.swing.JLabel
 import javax.swing.JPanel
+import APP_VERSION
 
 class HeaderPanel(model: SwingModel): OSCFPanel() {
 	init {
@@ -22,6 +23,7 @@ class HeaderPanel(model: SwingModel): OSCFPanel() {
 			StringsManager.get("application_title")
 		)
 		res.text = res.text.uppercase()
+		res.text = "${res.text} v$APP_VERSION"
 		res.isEnabled = true
 		return res
 	}
@@ -50,7 +52,7 @@ class HeaderPanel(model: SwingModel): OSCFPanel() {
 		res.layout = GridLayout(1,3)
 
 		res.add(createTitleLabel())
-		res.add(OSCFLabel("1.1.1"))
+		res.add(OSCFPanel())
 		res.add(createRepositoryButton())
 
 		return res
