@@ -10,9 +10,9 @@ enum class ApplicationEvents : Event {
 	SELECT_IMAGE,
 
 	/**
-	 * Event when the user changes the value of the TV effect size.
+	 * Event when the user changes at least one parameter.
 	 */
-	CHANGE_TV_EFFECT_SIZE,
+	CHANGE_PARAMETER,
 
 	/**
 	 * Event when the user applies the filter.

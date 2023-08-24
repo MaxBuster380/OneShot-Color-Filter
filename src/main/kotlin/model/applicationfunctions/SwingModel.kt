@@ -53,7 +53,7 @@ class SwingModel {
 
 		val oldValue = tvEffectSize
 		tvEffectSize = newValue
-		applyEvent(ApplicationEvents.CHANGE_TV_EFFECT_SIZE)
+		applyEvent(ApplicationEvents.CHANGE_PARAMETER)
 		propertyChange.firePropertyChange("tvEffectSize", oldValue, newValue)
 	}
 

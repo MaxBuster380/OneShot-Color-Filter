@@ -9,13 +9,14 @@ import java.awt.event.FocusListener
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.swing.*
-import view.applicationstates.ApplicationEvents.CHANGE_TV_EFFECT_SIZE
+import view.applicationstates.ApplicationEvents.CHANGE_PARAMETER
 import view.applicationstates.ApplicationEvents.APPLY_FILTER
 
 
 class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), PropertyChangeListener, UpdatableComponent {
 
-	private val tvEffectSizeTextField = createTvEffectSizeTextField()
+	//private val tvEffectSizeTextField = createTvEffectSizeTextField()
+	private val parameterMenuButton = createParameterMenuButton()
 	private val progressBar = createProgressBar()
 	private val applyButton = createApplyButton()
 
@@ -31,6 +32,7 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 		update()
 	}
 
+	/*
 	private fun changeTvEffectSize(rawNewValue:String) {
 		try {
 			val newValue = if (rawNewValue != "") {
@@ -45,7 +47,18 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 
 			model.setTvEffectSize(newValue)
 		}catch(_:Exception) {}
-		tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
+		/tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
+	}
+	*/
+
+	private fun createParameterMenuButton() : JButton {
+		val res = OSCFButton("PLACEHOLDER")
+
+		res.addActionListener {
+			ParameterFrame(model)
+		}
+
+		return res
 	}
 
 	private fun createProgressBar():JProgressBar {
@@ -54,6 +67,7 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 		return res
 	}
 
+	/*
 	private fun createTvEffectSizeTextField(): JTextField {
 		val res = OSCFTextField()
 
@@ -71,6 +85,7 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 
 		return res
 	}
+	*/
 
 	private fun createApplyButton(): JButton {
 		val res = OSCFButton(
@@ -84,6 +99,7 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 		return res
 	}
 
+
 	private fun createTvEffectSizePanel():JPanel {
 		val res = OSCFPanel()
 		res.layout = GridLayout(2,1)
@@ -92,9 +108,11 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 				StringsManager.get("set_tv_effect_size")
 			)
 		)
-		res.add(tvEffectSizeTextField)
+		//res.add(tvEffectSizeTextField)
+		res.add(parameterMenuButton)
 		return res
 	}
+
 
 	override fun propertyChange(evt: PropertyChangeEvent?) {
 		update()
@@ -102,9 +120,9 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 
 	override fun update() {
 		val runner = ApplicationRunner.getInstance()
-		tvEffectSizeTextField.isEnabled = runner.canApply(CHANGE_TV_EFFECT_SIZE)
+		//tvEffectSizeTextField.isEnabled = runner.canApply(CHANGE_PARAMETER)
 		applyButton.isEnabled = runner.canApply(APPLY_FILTER)
 
-		tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
+		//tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
 	}
 }
