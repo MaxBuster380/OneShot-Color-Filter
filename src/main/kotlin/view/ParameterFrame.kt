@@ -6,11 +6,12 @@ import view.recolored_ui.OSCFLabel
 import view.recolored_ui.OSCFPanel
 import view.recolored_ui.OSCFTextField
 import java.awt.BorderLayout
-import java.awt.FlowLayout
 import java.awt.GridLayout
-import java.awt.event.FocusEvent
-import java.awt.event.FocusListener
+import java.awt.event.WindowAdapter
+import java.awt.event.WindowEvent
 import javax.swing.*
+import view.applicationstates.ApplicationEvents.CLOSE_RECOLORING_PARAMETERS
+
 
 class ParameterFrame(private val model : SwingModel) : JFrame(), UpdatableComponent {
 	companion object {
@@ -26,6 +27,12 @@ class ParameterFrame(private val model : SwingModel) : JFrame(), UpdatableCompon
 		setSize(WIDTH, HEIGHT)
 		isResizable = false
 		layout = GridLayout(6,1)
+
+		addWindowListener(object : WindowAdapter() {
+			override fun windowClosing(e: WindowEvent) {
+				model.applyEvent(CLOSE_RECOLORING_PARAMETERS)
+			}
+		})
 
 		createIconImage()
 		//add(createTitlePanel())

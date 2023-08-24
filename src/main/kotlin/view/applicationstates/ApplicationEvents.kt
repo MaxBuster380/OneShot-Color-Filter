@@ -27,5 +27,15 @@ enum class ApplicationEvents : Event {
 	/**
 	 * Event when the user exports their work.
 	 */
-	EXPORT
+	EXPORT,
+
+	/**
+	 * Event when the user opens the recoloring parameters page.
+	 */
+	OPEN_RECOLORING_PARAMETERS,
+
+	/**
+	 * Event when the user closes the recoloring parameters page.
+	 */
+	CLOSE_RECOLORING_PARAMETERS
 }

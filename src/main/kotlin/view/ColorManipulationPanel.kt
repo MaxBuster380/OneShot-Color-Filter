@@ -4,12 +4,10 @@ import model.applicationfunctions.SwingModel
 import view.applicationstates.ApplicationRunner
 import view.recolored_ui.*
 import java.awt.GridLayout
-import java.awt.event.FocusEvent
-import java.awt.event.FocusListener
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.swing.*
-import view.applicationstates.ApplicationEvents.CHANGE_PARAMETER
+import view.applicationstates.ApplicationEvents.OPEN_RECOLORING_PARAMETERS
 import view.applicationstates.ApplicationEvents.APPLY_FILTER
 
 
@@ -37,6 +35,7 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 		)
 
 		res.addActionListener {
+			model.applyEvent(OPEN_RECOLORING_PARAMETERS)
 			ParameterFrame(model)
 		}
 
@@ -68,9 +67,7 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 
 	override fun update() {
 		val runner = ApplicationRunner.getInstance()
-		//tvEffectSizeTextField.isEnabled = runner.canApply(CHANGE_PARAMETER)
+		parameterMenuButton.isEnabled = runner.canApply(OPEN_RECOLORING_PARAMETERS)
 		applyButton.isEnabled = runner.canApply(APPLY_FILTER)
-
-		//tvEffectSizeTextField.text = "${model.getTvEffectSize()}"
 	}
 }

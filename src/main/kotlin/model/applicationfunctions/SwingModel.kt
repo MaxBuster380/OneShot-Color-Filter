@@ -139,7 +139,7 @@ class SwingModel {
 		return inputFile
 	}
 
-	private fun applyEvent(event : Event) {
+	fun applyEvent(event : Event) {
 		val runner = ApplicationRunner.getInstance()
 
 		val oldState = runner.getState()
