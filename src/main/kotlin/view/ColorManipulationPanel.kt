@@ -52,7 +52,9 @@ class ColorManipulationPanel(private val model: SwingModel): OSCFPanel(), Proper
 	*/
 
 	private fun createParameterMenuButton() : JButton {
-		val res = OSCFButton("PLACEHOLDER")
+		val res = OSCFButton(
+			StringsManager.get("parameters_menu_button")
+		)
 
 		res.addActionListener {
 			ParameterFrame(model)
