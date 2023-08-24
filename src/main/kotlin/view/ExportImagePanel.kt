@@ -1,6 +1,7 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import view.applicationstates.ApplicationRunner
 import view.recolored_ui.OSCFButton
 import view.recolored_ui.OSCFLabel
 import view.recolored_ui.OSCFPanel
@@ -10,6 +11,7 @@ import java.awt.GridLayout
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.swing.*
+import view.applicationstates.ApplicationEvents.EXPORT
 
 class ExportImagePanel(private val model: SwingModel): OSCFPanel(),PropertyChangeListener,UpdatableComponent {
 
@@ -109,16 +111,15 @@ class ExportImagePanel(private val model: SwingModel): OSCFPanel(),PropertyChang
 		return res
 	}
 	override fun propertyChange(evt: PropertyChangeEvent) {
-		val propertiesToUpdateOn = listOf("outputPath","filteredWithTvImage", "inputPath","working", "unfilteredImage")
-		if (evt.propertyName in propertiesToUpdateOn) {
-			update()
-		}
+		update()
 	}
 
 	override fun update() {
+		val runner = ApplicationRunner.getInstance()
+
 		autoGeneratePathCheckBox.isSelected = checkedAutoGeneratePath
 		pickExportDirectoryButton.isEnabled = !checkedAutoGeneratePath
-		exportImageButton.isEnabled = model.getFilteredWithTvImage() != null && !model.isWorking()
+		exportImageButton.isEnabled = runner.canApply(EXPORT)
 
 		exportedFilePathTextField.text = if (model.getOutputPath() != "") {
 			model.getOutputPath()

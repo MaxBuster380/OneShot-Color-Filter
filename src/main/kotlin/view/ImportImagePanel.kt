@@ -2,6 +2,8 @@ package view
 
 import model.applicationfunctions.FileFetcher
 import model.applicationfunctions.SwingModel
+import view.applicationstates.ApplicationEvents.SELECT_IMAGE
+import view.applicationstates.ApplicationRunner
 import view.recolored_ui.OSCFButton
 import view.recolored_ui.OSCFPanel
 import view.recolored_ui.OSCFTextField
@@ -51,14 +53,12 @@ class ImportImagePanel(private val model: SwingModel):OSCFPanel(),PropertyChange
 	}
 
 	override fun propertyChange(evt: PropertyChangeEvent) {
-		val propertiesToUpdateOn = listOf("inputPath","working")
-		if (evt.propertyName in propertiesToUpdateOn) {
-			update()
-		}
+		update()
 	}
 
 	override fun update() {
-		pickNewFileButton.isEnabled = !model.isWorking()
+		val runner = ApplicationRunner.getInstance()
+		pickNewFileButton.isEnabled = runner.canApply(SELECT_IMAGE)
 
 		importedFilePathTextField.text = if (model.getInputPath() != "") {
 			model.getInputPath()

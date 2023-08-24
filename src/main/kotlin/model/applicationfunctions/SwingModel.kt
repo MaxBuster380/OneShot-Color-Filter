@@ -1,7 +1,9 @@
 package model.applicationfunctions
 
+import events.Event
 import model.classes.BissectedCube
-import java.awt.Color
+import view.applicationstates.ApplicationEvents
+import view.applicationstates.ApplicationRunner
 import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
 import java.io.File
@@ -11,6 +13,8 @@ import javax.swing.JProgressBar
 class SwingModel {
 	companion object {
 		const val DEFAULT_TV_EFFECT_SIZE = 2
+
+		const val STATE_CHANGE = "stateChange"
 	}
 
 	private var inputFile:File? = null
@@ -24,8 +28,6 @@ class SwingModel {
 	private val rGBCube: BissectedCube = RGBCubeBuilder.getRGBCube("dataColors.txt")
 
 	private val propertyChange = PropertyChangeSupport(this)
-
-	private var working = false
 
 	fun addPropertyChangeListener(listener:PropertyChangeListener) {
 		propertyChange.addPropertyChangeListener(listener)
@@ -51,6 +53,7 @@ class SwingModel {
 
 		val oldValue = tvEffectSize
 		tvEffectSize = newValue
+		applyEvent(ApplicationEvents.CHANGE_TV_EFFECT_SIZE)
 		propertyChange.firePropertyChange("tvEffectSize", oldValue, newValue)
 	}
 
@@ -61,6 +64,7 @@ class SwingModel {
 			unfilteredImage = FileFetcher.loadImage(getInputPath())
 			filteredNoTvImage = null
 			filteredWithTvImage = null
+			applyEvent(ApplicationEvents.SELECT_IMAGE)
 			propertyChange.firePropertyChange("unfilteredImage", null, null)
 		}catch(e:Exception) {
 			propertyChange.firePropertyChange("import_failure", null, e)
@@ -68,13 +72,13 @@ class SwingModel {
 	}
 
 	fun generateFilteredImage(progressBar: JProgressBar) {
+		applyEvent(ApplicationEvents.APPLY_FILTER)
 		Thread {
-			setWorking(true)
 			if (getFilteredWithTvImage() == null) {
 				generateFilteredNoTvImage(progressBar)
 			}
 			generateFilteredWithTvImage()
-			setWorking(false)
+			applyEvent(ApplicationEvents.DONE)
 		}.start()
 	}
 
@@ -96,6 +100,7 @@ class SwingModel {
 
 		try {
 			filteredWithTvImage!!.save(getOutputPath())
+			applyEvent(ApplicationEvents.EXPORT)
 			propertyChange.firePropertyChange("export", 0, 1)
 		}catch(e:Exception) {
 			propertyChange.firePropertyChange("failure_export",null, e)
@@ -134,13 +139,15 @@ class SwingModel {
 		return inputFile
 	}
 
-	fun isWorking():Boolean {
-		return working
-	}
+	private fun applyEvent(event : Event) {
+		val runner = ApplicationRunner.getInstance()
 
-	private fun setWorking(newValue:Boolean) {
-		val oldValue = working
-		working = newValue
-		propertyChange.firePropertyChange("working",oldValue,newValue)
+		val oldState = runner.getState()
+
+		runner.apply(event)
+
+		val newState = runner.getState()
+
+		propertyChange.firePropertyChange(STATE_CHANGE, oldState, newState)
 	}
 }
