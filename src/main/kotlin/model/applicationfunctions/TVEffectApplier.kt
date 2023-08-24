@@ -10,9 +10,11 @@ class TVEffectApplier {
 			var targetY = thickness
 			while (y < source.getImage().height) {
 
-				for (x in 0 until source.getImage().width) {
-					val tvColorInt = getTVColor(Color(source.getImage().getRGB(x, y)))
-					source.getImage().setRGB(x, y, tvColorInt)
+				for (x in 0..<source.getImage().width) {
+					val inputColor = source.getImage().getRGB(x, y)
+					val tvColorInt = getTVColor(Color(inputColor))
+					val outputColor = ColorIntegerConverter.copyTransparency(inputColor, tvColorInt)
+					source.getImage().setRGB(x, y, outputColor)
 				}
 
 				y += 1
