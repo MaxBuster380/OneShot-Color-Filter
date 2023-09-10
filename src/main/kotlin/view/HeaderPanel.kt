@@ -1,6 +1,8 @@
 package view
 
 import model.applicationfunctions.SwingModel
+import model.applicationfunctions.urlopener.URLOpener
+import model.applicationfunctions.urlopener.WindowsURLOpener
 import view.recolored_ui.OSCFButton
 import view.recolored_ui.OSCFLabel
 import view.recolored_ui.OSCFPanel
@@ -36,9 +38,8 @@ class HeaderPanel(model: SwingModel): OSCFPanel() {
 		res.isEnabled = true
 
 		res.addActionListener {
-			val rt = Runtime.getRuntime()
-			rt.exec("rundll32 url.dll,FileProtocolHandler $repositoryUrl")
-
+			val urlOpener : URLOpener = WindowsURLOpener()
+			urlOpener.open(repositoryUrl)
 		}
 
 		return res
