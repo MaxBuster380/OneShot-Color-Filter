@@ -3,7 +3,7 @@ package view.applicationstates
 import automatons.Automaton
 import events.Event
 import runners.Runner
-import runners.StandardRunner
+import runners.SetRunner
 import states.State
 import view.applicationstates.ApplicationStates.NO_FILE
 
@@ -32,7 +32,7 @@ class ApplicationRunner : Runner {
 
 	init {
 		val automaton = ApplicationAutomatonFactory.create()
-		subRunner = StandardRunner(automaton = automaton, setOf(NO_FILE))
+		subRunner = SetRunner(automaton = automaton, setOf(NO_FILE))
 	}
 
 	// PUBLIC INSTANCE METHODS
@@ -58,6 +58,10 @@ class ApplicationRunner : Runner {
 
 	override fun getCurrentStates(): Set<State> {
 		return subRunner.getCurrentStates()
+	}
+
+	override fun isInState(state: State): Boolean {
+		return subRunner.isInState(state)
 	}
 
 	override fun getAutomaton(): Automaton {

@@ -1,7 +1,6 @@
 package view.applicationstates
 
 import automatons.Automaton
-import automatons.StandardAutomaton
 import view.applicationstates.ApplicationStates.*
 import view.applicationstates.ApplicationEvents.*
 
@@ -12,7 +11,7 @@ import view.applicationstates.ApplicationEvents.*
 class ApplicationAutomatonFactory {
 	companion object {
 		fun create() : Automaton {
-			val res = StandardAutomaton()
+			val res = Automaton.new()
 			res
 				.add(NO_FILE, SELECT_IMAGE, IMAGE_UNAPPLIED)
 				.add(NO_FILE, OPEN_RECOLORING_PARAMETERS, RECOLORING_PARAMETERS_NO_FILE)
